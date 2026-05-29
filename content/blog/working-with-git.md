@@ -17,9 +17,9 @@ Now, imagine you were nearing your deadline and pushed the update without proper
 
 Here comes the concept of version control.
 
-> Version control keep track of each update, which files got updated, which lines changed, what got deleted, and so on in a very clean manner.
->
-> A tool that tracks all this, apart from providing an extensive document for production, also helps to undo changes and return the project to last known working condition.
+ Version control keep track of each update, which files got updated, which lines changed, what got deleted, and so on in a very clean manner.
+
+ A tool that tracks all this, apart from providing an extensive document for production, also helps to undo changes and return the project to last known working condition.
 
 ---
 
