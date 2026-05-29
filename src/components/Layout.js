@@ -67,14 +67,13 @@ export default function Layout({ children }) {
       <footer style={footerWrapStyle}>
         <div style={footerStyle}>
           <p style={{ fontSize: 12, color: "var(--subtle)" }}>
-            © {new Date().getFullYear()} Alex. All rights reserved.
+            © {new Date().getFullYear()} Nida. All rights reserved.
           </p>
           <div style={{ display: "flex", gap: 16 }}>
             {[
-              { href: "https://github.com/yourusername", label: "GitHub" },
+              { href: "https://github.com/Nida-18", label: "GitHub" },
               { href: "https://twitter.com/yourusername", label: "Twitter" },
-              { href: "/rss.xml", label: "RSS" },
-              { href: "mailto:hello@example.com", label: "Email" },
+              { href: "mailto:nidafatima2645@gmail.com", label: "Email" },
             ].map(({ href, label }) => (
               <a key={label} href={href} style={footerLinkStyle}>{label}</a>
             ))}
