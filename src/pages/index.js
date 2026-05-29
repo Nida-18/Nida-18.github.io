@@ -30,7 +30,7 @@ export const query = graphql`
         frontmatter {
           title
           date(formatString: "MMM YYYY")
-          tag
+ 
         }
       }
     }
@@ -61,6 +61,7 @@ export default function Home({ data }) {
 
   return (
     <Layout>
+
       {/* HERO */}
       <div style={heroStyle}>
         <div>
@@ -69,7 +70,7 @@ export default function Home({ data }) {
 
           <p style={heroDescStyle}>
             I'm a Computer Science Engineer interested in making the digital world more secure.
-            This page documents my journey in Cyber Security and{" "}
+            This page documents my Cyber Security journey and{" "}
             <a href="/blog" style={inlineLinkStyle}>writing about it</a>.
           </p>
 
@@ -94,7 +95,7 @@ export default function Home({ data }) {
         <section style={sectionStyle}>
           <SectionHeader
             title="🌐 Blog"
-            sub="Tutorials, Steps and Few Thoughts!"
+            sub="Tutorials, Steps and Thoughts"
             linkTo="/blog"
             linkLabel="All Posts →"
           />
@@ -121,19 +122,29 @@ export default function Home({ data }) {
         <section style={sectionStyle}>
           <SectionHeader
             title="📒 Notes"
-            sub="Theory, Concepts, Everything in one place."
+            sub="Theory, Concepts, Everything in one place"
             linkTo="/notes"
             linkLabel="All Notes →"
           />
 
           <div style={notesGridStyle}>
-            {notes.map((note) => (
-              <Link key={note.fields.slug} to={note.fields.slug} style={noteCardStyle}>
-                <div style={noteTagStyle}>{note.frontmatter.tag}</div>
-                <div style={noteTitleStyle}>{note.frontmatter.title}</div>
-                <div style={noteDateStyle}>{note.frontmatter.date}</div>
-              </Link>
-            ))}
+            {notes.map((note) => {
+
+              return (
+                <Link key={note.fields.slug} to={note.fields.slug} style={noteCardStyle}>
+
+                 
+                  <div style={noteTitleStyle}>
+                    {note.frontmatter.title}
+                  </div>
+
+                  <div style={noteDateStyle}>
+                    {note.frontmatter.date}
+                  </div>
+
+                </Link>
+              )
+            })}
           </div>
         </section>
 
@@ -141,7 +152,7 @@ export default function Home({ data }) {
         <section style={sectionStyle}>
           <SectionHeader
             title="🔐 Projects"
-            sub="Showcase of Theory to Practical."
+            sub="Showcase of Theory to Practical"
             linkTo="/projects"
             linkLabel="All Projects →"
           />
@@ -150,6 +161,7 @@ export default function Home({ data }) {
             {projects.map((p) => (
               <li key={p.fields.slug} style={projectItemStyle}>
                 <div style={{ flex: 1 }}>
+
                   <a
                     href={p.frontmatter.url}
                     style={projectNameStyle}
@@ -164,11 +176,15 @@ export default function Home({ data }) {
                     {p.frontmatter.description}
                   </p>
 
+                  {/* PROJECT TAGS */}
                   <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 8 }}>
                     {p.frontmatter.tags?.map((t) => (
-                      <span key={t} style={tagStyle}>{t}</span>
+                      <span key={t} style={tagStyle}>
+                        {t}
+                      </span>
                     ))}
                   </div>
+
                 </div>
 
                 <div style={starsStyle}>
@@ -198,8 +214,9 @@ function SectionHeader({ title, sub, linkTo, linkLabel }) {
   )
 }
 
-/* ================= STYLES (IMPROVED READABILITY) ================= */
+/* ================= STYLES ================= */
 
+/* HERO */
 const heroStyle = {
   maxWidth: "var(--max-w)",
   margin: "0 auto",
@@ -269,6 +286,7 @@ const avatarStyle = {
   fontSize: 42,
 }
 
+/* CONTENT */
 const contentStyle = {
   maxWidth: "var(--max-w)",
   margin: "0 auto",
@@ -345,11 +363,7 @@ const noteCardStyle = {
   textDecoration: "none",
 }
 
-const noteTagStyle = {
-  fontSize: 12,
-  color: "var(--subtle)",
-  marginBottom: "0.5rem",
-}
+
 
 const noteTitleStyle = {
   fontSize: 15,
@@ -389,7 +403,7 @@ const projectDescStyle = {
 }
 
 const tagStyle = {
-  fontSize: 12,
+  fontSize: 7,
   color: "var(--muted)",
   background: "var(--bg3)",
   border: "1px solid var(--border)",

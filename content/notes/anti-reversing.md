@@ -1,7 +1,11 @@
 ---
-title: "On building in public and staying sane"
-date: "2025-05-01"
-tag: "life"
+title: "Introduction to Anti Reversing"
+date: "2026-05-29"
+tag:  
+      - "Malware Analysis"
+      - "Defensive Security"
+      - "Cyber Security"
+    
 ---
 
 Building in public is one of those ideas that sounds simple but gets complicated fast. You share your work, people respond, and ideally you grow an audience.
