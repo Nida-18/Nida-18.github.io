@@ -39,6 +39,7 @@ export default function ProjectQuery({ data }) {
         </header>
 
         <div
+          className="markdown-body"
           style={proseStyle}
           dangerouslySetInnerHTML={{ __html: project.html }}
         />

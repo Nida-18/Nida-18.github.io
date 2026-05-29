@@ -36,6 +36,7 @@ export default function BlogPost({ data }) {
         </header>
 
         <div
+          className="markdown-body"
           style={proseStyle}
           dangerouslySetInnerHTML={{ __html: post.html }}
         />

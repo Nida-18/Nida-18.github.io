@@ -29,6 +29,7 @@ export default function Note({ data }) {
         <div style={metaStyle}>{date}</div>
 
         <div
+          className="markdown-body"
           style={{ color: "var(--muted)", lineHeight: 1.85, fontSize: 15, marginTop: "2rem" }}
           dangerouslySetInnerHTML={{ __html: note.html }}
         />
