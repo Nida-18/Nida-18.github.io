@@ -64,7 +64,7 @@ export default function Home({ data }) {
   return (
     <Layout>
       {/* ── HERO ── */}
-      <dev style={heroStyle}>
+      <div style={heroStyle}>
         <div style={heroTextStyle}>
           <h1 style={h1Style}>Hello there, this is Nida!</h1>
           <h2 style={h2Style} >Welcome to my Tech Corner</h2>
@@ -85,7 +85,7 @@ export default function Home({ data }) {
         
         </div>
         <div style={avatarStyle}>👧🏻</div>
-      </dev>
+      </div>
 
       {/* ── CONTENT ── */}
       <div style={contentStyle}>
@@ -193,8 +193,8 @@ const h1Style = {
 }
 const h2Style = {
   fontFamily: "var(--serif)",
-  fontSize: "clamp(2.1rem ,5vw,3rem",
-  fondtWeight: 350, lineHeight: 1.0,
+  fontSize: "clamp(1.5rem,3vw,2rem)",
+  fontWeight: 300, lineHeight: 1.0,
   marginBottom: "1.1rem", color: "var(--text)"
 }
 const heroDescStyle = {
