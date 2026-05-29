@@ -1,333 +1,39 @@
-exports.id = "component---src-templates-project-js";
-exports.ids = ["component---src-templates-project-js"];
+"use strict";
+exports.id = 123;
+exports.ids = [123];
 exports.modules = {
 
-/***/ "./src/components/Layout.js":
-/*!**********************************!*\
-  !*** ./src/components/Layout.js ***!
-  \**********************************/
+/***/ 221:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Layout)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
-/* harmony import */ var _styles_global_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../styles/global.css */ "./src/styles/global.css");
-/* harmony import */ var _styles_global_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_styles_global_css__WEBPACK_IMPORTED_MODULE_2__);
-// src/components/Layout.js
-
-
-
-
-// Google Fonts are loaded via gatsby-plugin-manifest / HTML head.
-// Add this to gatsby-ssr.js if you need them injected server-side.
-
-function Layout({
-  children
-}) {
-  const {
-    0: theme,
-    1: setTheme
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("dark");
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    const saved = localStorage.getItem("theme") || "dark";
-    setTheme(saved);
-    document.documentElement.setAttribute("data-theme", saved);
-  }, []);
-  const toggleTheme = () => {
-    const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    localStorage.setItem("theme", next);
-    document.documentElement.setAttribute("data-theme", next);
-  };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("link", {
-    rel: "preconnect",
-    href: "https://fonts.googleapis.com"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("link", {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "true"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("link", {
-    href: "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap",
-    rel: "stylesheet"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", {
-    style: navStyle
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-    to: "/",
-    style: logoStyle
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    style: logoIconStyle
-  }, "\u2726"), "Nida"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
-    style: navLinksStyle
-  }, [{
-    to: "/#blog",
-    icon: "🌐",
-    label: "Blog"
-  }, {
-    to: "/#notes",
-    icon: "📒",
-    label: "Notes"
-  }, {
-    to: "/#projects",
-    icon: "🔐",
-    label: "Projects"
-  }, {
-    to: "/about",
-    icon: "ℹ️",
-    label: "About Me"
-  }].map(({
-    to,
-    icon,
-    label
-  }) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-    key: label
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-    to: to,
-    style: navLinkStyle,
-    activeStyle: {
-      color: "var(--text)"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, icon), " ", label)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: toggleTheme,
-    style: themeBtnStyle,
-    "aria-label": "Toggle theme"
-  }, theme === "dark" ? "☀️" : "🌙")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, children), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("footer", {
-    style: footerWrapStyle
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: footerStyle
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    style: {
-      fontSize: 12,
-      color: "var(--subtle)"
-    }
-  }, "\xA9 ", new Date().getFullYear(), " Alex. All rights reserved."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      display: "flex",
-      gap: 16
-    }
-  }, [{
-    href: "https://github.com/yourusername",
-    label: "GitHub"
-  }, {
-    href: "https://twitter.com/yourusername",
-    label: "Twitter"
-  }, {
-    href: "/rss.xml",
-    label: "RSS"
-  }, {
-    href: "mailto:hello@example.com",
-    label: "Email"
-  }].map(({
-    href,
-    label
-  }) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    key: label,
-    href: href,
-    style: footerLinkStyle
-  }, label))))));
-}
-
-/* ── inline styles ── */
-const navStyle = {
-  position: "sticky",
-  top: 0,
-  zIndex: 100,
-  background: "rgba(17,17,16,0.85)",
-  backdropFilter: "blur(12px)",
-  borderBottom: "1px solid var(--border)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  padding: "0 2rem",
-  height: 52
-};
-const logoStyle = {
-  display: "flex",
-  alignItems: "center",
-  gap: 8,
-  fontSize: 14,
-  fontWeight: 500,
-  color: "var(--text)",
-  textDecoration: "none"
-};
-const logoIconStyle = {
-  width: 26,
-  height: 26,
-  background: "linear-gradient(135deg,#e8715a,#c45a44)",
-  borderRadius: 6,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  fontSize: 13
-};
-const navLinksStyle = {
-  display: "flex",
-  alignItems: "center",
-  gap: 4,
-  listStyle: "none"
-};
-const navLinkStyle = {
-  display: "flex",
-  alignItems: "center",
-  gap: 6,
-  padding: "5px 10px",
-  borderRadius: 6,
-  fontSize: 13,
-  color: "var(--muted)",
-  textDecoration: "none"
-};
-const themeBtnStyle = {
-  width: 32,
-  height: 32,
-  borderRadius: "50%",
-  background: "var(--bg3)",
-  border: "1px solid var(--border2)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  cursor: "pointer",
-  fontSize: 15
-};
-const footerWrapStyle = {
-  borderTop: "1px solid var(--border)"
-};
-const footerStyle = {
-  maxWidth: "var(--max-w)",
-  margin: "0 auto",
-  padding: "2rem",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  flexWrap: "wrap",
-  gap: "1rem"
-};
-const footerLinkStyle = {
-  fontSize: 12,
-  color: "var(--muted)",
-  textDecoration: "none"
-};
-
-/***/ }),
-
-/***/ "./src/styles/global.css":
-/*!*******************************!*\
-  !*** ./src/styles/global.css ***!
-  \*******************************/
-/***/ (() => {
-
-
-
-/***/ }),
-
-/***/ "./src/templates/project.js?export=default":
-/*!*************************************************!*\
-  !*** ./src/templates/project.js?export=default ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ ProjectQuery)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7507);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
-/* harmony import */ var _components_Layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Layout */ "./src/components/Layout.js");
+/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(123);
+/* harmony import */ var _components_Layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4679);
 // src/templates/blog-post.js
+const query="2971989378";function ProjectQuery({data}){const project=data.markdownRemark;const{title,date,description}=project.frontmatter;return/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Layout__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .A,null,/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("article",{style:articleStyle},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("header",{style:{marginBottom:"2.5rem"}},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link,{to:"/projects",style:backStyle},"\u2190 All Projects"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1",{style:h1Style},title),description&&/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p",{style:descStyle},description),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div",{style:metaStyle},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span",null,date),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span",{style:{color:"var(--border2)"}},"\xB7"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span",null,project.timeToRead," min read"))),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div",{style:proseStyle,dangerouslySetInnerHTML:{__html:project.html}}),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("footer",{style:footerStyle},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link,{to:"/projects",style:backStyle},"\u2190 Back to Projects"))));}const articleStyle={maxWidth:660,margin:"0 auto",padding:"4rem 2rem 6rem"};const backStyle={fontSize:13,color:"var(--muted)",textDecoration:"none",display:"inline-block",marginBottom:"1.5rem"};const h1Style={fontFamily:"var(--serif)",fontSize:"clamp(1.8rem,4vw,2.5rem)",fontWeight:400,color:"var(--text)",lineHeight:1.2,marginBottom:"0.75rem"};const descStyle={fontSize:16,color:"var(--muted)",marginBottom:"1rem",lineHeight:1.6};const metaStyle={display:"flex",gap:8,fontSize:12,color:"var(--subtle)",fontFamily:"var(--mono)"};const footerStyle={marginTop:"3rem",paddingTop:"2rem",borderTop:"1px solid var(--border)"};const proseStyle={color:"var(--muted)",lineHeight:1.85,fontSize:15// Prose element styles applied via global.css / inline below won't affect
+// dangerouslySetInnerHTML children — add rules to global.css instead.
+};
 
+/***/ }),
 
+/***/ 4679:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-const query = "2971989378";
-function ProjectQuery({
-  data
-}) {
-  const project = data.markdownRemark;
-  const {
-    title,
-    date,
-    description
-  } = project.frontmatter;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Layout__WEBPACK_IMPORTED_MODULE_2__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("article", {
-    style: articleStyle
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("header", {
-    style: {
-      marginBottom: "2.5rem"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-    to: "/projects",
-    style: backStyle
-  }, "\u2190 All Projects"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
-    style: h1Style
-  }, title), description && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    style: descStyle
-  }, description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: metaStyle
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, date), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    style: {
-      color: "var(--border2)"
-    }
-  }, "\xB7"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, project.timeToRead, " min read"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: proseStyle,
-    dangerouslySetInnerHTML: {
-      __html: project.html
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("footer", {
-    style: footerStyle
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
-    to: "/projects",
-    style: backStyle
-  }, "\u2190 Back to Projects"))));
-}
-const articleStyle = {
-  maxWidth: 660,
-  margin: "0 auto",
-  padding: "4rem 2rem 6rem"
-};
-const backStyle = {
-  fontSize: 13,
-  color: "var(--muted)",
-  textDecoration: "none",
-  display: "inline-block",
-  marginBottom: "1.5rem"
-};
-const h1Style = {
-  fontFamily: "var(--serif)",
-  fontSize: "clamp(1.8rem,4vw,2.5rem)",
-  fontWeight: 400,
-  color: "var(--text)",
-  lineHeight: 1.2,
-  marginBottom: "0.75rem"
-};
-const descStyle = {
-  fontSize: 16,
-  color: "var(--muted)",
-  marginBottom: "1rem",
-  lineHeight: 1.6
-};
-const metaStyle = {
-  display: "flex",
-  gap: 8,
-  fontSize: 12,
-  color: "var(--subtle)",
-  fontFamily: "var(--mono)"
-};
-const footerStyle = {
-  marginTop: "3rem",
-  paddingTop: "2rem",
-  borderTop: "1px solid var(--border)"
-};
-const proseStyle = {
-  color: "var(--muted)",
-  lineHeight: 1.85,
-  fontSize: 15
-  // Prose element styles applied via global.css / inline below won't affect
-  // dangerouslySetInnerHTML children — add rules to global.css instead.
-};
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   A: () => (/* binding */ Layout)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7507);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(123);
+// src/components/Layout.js
+// Google Fonts are loaded via gatsby-plugin-manifest / HTML head.
+// Add this to gatsby-ssr.js if you need them injected server-side.
+function Layout({children}){const{0:theme,1:setTheme}=(0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("dark");(0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(()=>{const saved=localStorage.getItem("theme")||"dark";setTheme(saved);document.documentElement.setAttribute("data-theme",saved);},[]);const toggleTheme=()=>{const next=theme==="dark"?"light":"dark";setTheme(next);localStorage.setItem("theme",next);document.documentElement.setAttribute("data-theme",next);};return/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment),null,/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("link",{rel:"preconnect",href:"https://fonts.googleapis.com"}),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("link",{rel:"preconnect",href:"https://fonts.gstatic.com",crossOrigin:"true"}),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("link",{href:"https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap",rel:"stylesheet"}),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav",{style:navStyle},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link,{to:"/",style:logoStyle},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span",{style:logoIconStyle},"\u2726"),"Nida"),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul",{style:navLinksStyle},[{to:"/#blog",icon:"🌐",label:"Blog"},{to:"/#notes",icon:"📒",label:"Notes"},{to:"/#projects",icon:"🔐",label:"Projects"},{to:"/about",icon:"ℹ️",label:"About Me"}].map(({to,icon,label})=>/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li",{key:label},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link,{to:to,style:navLinkStyle,activeStyle:{color:"var(--text)"}},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span",null,icon)," ",label)))),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button",{onClick:toggleTheme,style:themeBtnStyle,"aria-label":"Toggle theme"},theme==="dark"?"☀️":"🌙")),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main",null,children),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("footer",{style:footerWrapStyle},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div",{style:footerStyle},/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p",{style:{fontSize:12,color:"var(--subtle)"}},"\xA9 ",new Date().getFullYear()," Alex. All rights reserved."),/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div",{style:{display:"flex",gap:16}},[{href:"https://github.com/yourusername",label:"GitHub"},{href:"https://twitter.com/yourusername",label:"Twitter"},{href:"/rss.xml",label:"RSS"},{href:"mailto:hello@example.com",label:"Email"}].map(({href,label})=>/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a",{key:label,href:href,style:footerLinkStyle},label))))));}/* ── inline styles ── */const navStyle={position:"sticky",top:0,zIndex:100,background:"rgba(17,17,16,0.85)",backdropFilter:"blur(12px)",borderBottom:"1px solid var(--border)",display:"flex",alignItems:"center",justifyContent:"space-between",padding:"0 2rem",height:52};const logoStyle={display:"flex",alignItems:"center",gap:8,fontSize:14,fontWeight:500,color:"var(--text)",textDecoration:"none"};const logoIconStyle={width:26,height:26,background:"linear-gradient(135deg,#e8715a,#c45a44)",borderRadius:6,display:"flex",alignItems:"center",justifyContent:"center",fontSize:13};const navLinksStyle={display:"flex",alignItems:"center",gap:4,listStyle:"none"};const navLinkStyle={display:"flex",alignItems:"center",gap:6,padding:"5px 10px",borderRadius:6,fontSize:13,color:"var(--muted)",textDecoration:"none"};const themeBtnStyle={width:32,height:32,borderRadius:"50%",background:"var(--bg3)",border:"1px solid var(--border2)",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",fontSize:15};const footerWrapStyle={borderTop:"1px solid var(--border)"};const footerStyle={maxWidth:"var(--max-w)",margin:"0 auto",padding:"2rem",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:"1rem"};const footerLinkStyle={fontSize:12,color:"var(--muted)",textDecoration:"none"};
 
 /***/ })
 

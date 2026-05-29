@@ -1,14 +1,14 @@
 var plugins = [{
       name: 'gatsby-plugin-image',
-      plugin: require('/home/nida/Documents/gatsby-portfolio/node_modules/gatsby-plugin-image/gatsby-ssr.js'),
+      plugin: require('/home/nida/Documents/My-Portfolio/node_modules/gatsby-plugin-image/gatsby-ssr.js'),
       options: {"plugins":[]},
     },{
       name: 'gatsby-plugin-manifest',
-      plugin: require('/home/nida/Documents/gatsby-portfolio/node_modules/gatsby-plugin-manifest/gatsby-ssr.js'),
+      plugin: require('/home/nida/Documents/My-Portfolio/node_modules/gatsby-plugin-manifest/gatsby-ssr.js'),
       options: {"plugins":[],"name":"Nida— Portfolio","short_name":"Nida","start_url":"/","background_color":"#705549","theme_color":"#e8715a","display":"minimal-ui","icon":"static/favicon.png","legacy":true,"theme_color_in_head":true,"cache_busting_mode":"query","crossOrigin":"anonymous","include_favicon":true,"cacheDigest":"3609c77e2f905f24d9f4fc465b2ff279"},
     },{
       name: 'partytown',
-      plugin: require('/home/nida/Documents/gatsby-portfolio/node_modules/gatsby/dist/internal-plugins/partytown/gatsby-ssr.js'),
+      plugin: require('/home/nida/Documents/My-Portfolio/node_modules/gatsby/dist/internal-plugins/partytown/gatsby-ssr.js'),
       options: {"plugins":[]},
     }]
 /* global plugins */
