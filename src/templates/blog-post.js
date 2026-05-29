@@ -49,9 +49,9 @@ export default function BlogPost({ data }) {
   )
 }
 
-const articleStyle = { maxWidth: 660, margin: "0 auto", padding: "4rem 2rem 6rem" }
+const articleStyle = { maxWidth: "var(--max-w)", margin: "0 auto", padding: "4rem 2rem 6rem" }
 const backStyle = { fontSize: 13, color: "var(--muted)", textDecoration: "none", display: "inline-block", marginBottom: "1.5rem" }
-const h1Style = { fontFamily: "var(--serif)", fontSize: "clamp(1.8rem,4vw,2.5rem)", fontWeight: 400, color: "var(--text)", lineHeight: 1.2, marginBottom: "0.75rem" }
+const h1Style = { fontFamily: "var(--serif)", fontSize: "clamp(2.4rem,6vw,4.8rem)", fontWeight: 400, color: "var(--text)", lineHeight: 1.2, marginBottom: "0.75rem" }
 const descStyle = { fontSize: 16, color: "var(--muted)", marginBottom: "1rem", lineHeight: 1.6 }
 const metaStyle = { display: "flex", gap: 8, fontSize: 12, color: "var(--subtle)", fontFamily: "var(--mono)" }
 const footerStyle = { marginTop: "3rem", paddingTop: "2rem", borderTop: "1px solid var(--border)" }

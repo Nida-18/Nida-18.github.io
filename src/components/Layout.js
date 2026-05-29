@@ -41,9 +41,9 @@ export default function Layout({ children }) {
 
         <ul style={navLinksStyle}>
           {[
-            { to: "/#blog",     icon: "🌐", label: "Blog" },
-            { to: "/#notes",    icon: "📒",  label: "Notes" },
-            { to: "/#projects", icon: "🔐",  label: "Projects" },
+            { to: "/blog",     icon: "🌐", label: "Blog" },
+            { to: "/notes",    icon: "📒",  label: "Notes" },
+            { to: "/projects", icon: "🔐",  label: "Projects" },
             { to: "/about",     icon: "ℹ️",  label: "About Me" },
           ].map(({ to, icon, label }) => (
             <li key={label}>

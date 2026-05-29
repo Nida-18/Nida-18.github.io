@@ -241,18 +241,16 @@ function Home({
   const projects = data.projects.nodes;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Layout__WEBPACK_IMPORTED_MODULE_2__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     style: heroStyle
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: heroTextStyle
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
     style: h1Style
   }, "Hello there, this is Nida!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
     style: h2Style
   }, "Welcome to my Tech Corner"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     style: heroDescStyle
-  }, "I'm a Compter Science Engineer with a special interest in making the digital world a teensy bit more secure. This page is to document the journey through Cyber Security learnings and ", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+  }, "I'm a Computer Science Engineer interested in making the digital world more secure. This page documents my journey in Cyber Security and", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     href: "/blog",
     style: inlineLinkStyle
-  }, "writing about it"), " along the way."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+  }, "writing about it"), "."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     style: heroNoteStyle
   }, "This page does not contain content written by AI."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     style: {
@@ -263,15 +261,14 @@ function Home({
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
     to: "/about",
     style: btnStyle
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "\u2139\uFE0F"), " About Me"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, "\u2139\uFE0F About Me"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     style: avatarStyle
   }, "\uD83D\uDC67\uD83C\uDFFB")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     style: contentStyle
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
-    style: sectionStyle,
-    id: "blog"
+    style: sectionStyle
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(SectionHeader, {
-    title: " \uD83C\uDF10Blog",
+    title: "\uD83C\uDF10 Blog",
     sub: "Guides, references, and tutorials.",
     linkTo: "/blog",
     linkLabel: "All Posts \u2192"
@@ -288,8 +285,7 @@ function Home({
     style: {
       display: "flex",
       alignItems: "center",
-      gap: 8,
-      flex: 1
+      gap: 8
     }
   }, post.frontmatter.isNew && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     style: badgeStyle
@@ -297,10 +293,9 @@ function Home({
     to: post.fields.slug,
     style: postTitleStyle
   }, post.frontmatter.title)))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
-    style: sectionStyle,
-    id: "notes"
+    style: sectionStyle
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(SectionHeader, {
-    title: " \uD83D\uDCD2Notes",
+    title: "\uD83D\uDCD2 Notes",
     sub: "Life, music, projects, and everything else.",
     linkTo: "/notes",
     linkLabel: "All Notes \u2192"
@@ -317,10 +312,9 @@ function Home({
   }, note.frontmatter.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     style: noteDateStyle
   }, note.frontmatter.date))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
-    style: sectionStyle,
-    id: "projects"
+    style: sectionStyle
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(SectionHeader, {
-    title: " \uD83D\uDD10Projects",
+    title: "\uD83D\uDD10 Projects",
     sub: "Things I've built and shipped.",
     linkTo: "/projects",
     linkLabel: "All Projects \u2192"
@@ -348,10 +342,7 @@ function Home({
         color: "var(--subtle)"
       }
     }, "\u2197")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-      style: {
-        fontSize: 13,
-        color: "var(--muted)"
-      }
+      style: projectDescStyle
     }, p.frontmatter.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       style: {
         display: "flex",
@@ -364,15 +355,12 @@ function Home({
       style: tagStyle
     }, t)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       style: starsStyle
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-      style: {
-        color: "#c9a227"
-      }
-    }, "\u2605"), p.frontmatter.stars));
+    }, "\u2605 ", p.frontmatter.stars));
   })))));
 }
 
-/* ── Shared sub-component ── */
+/* ================= COMPONENT ================= */
+
 function SectionHeader({
   title,
   sub,
@@ -380,102 +368,79 @@ function SectionHeader({
   linkLabel
 }) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      display: "flex",
-      alignItems: "flex-start",
-      justifyContent: "space-between",
-      marginBottom: "0.3rem"
-    }
+    style: sectionHeaderStyle
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
-    style: {
-      fontSize: "1.1rem",
-      fontWeight: 500,
-      color: "var(--text)",
-      marginBottom: 4
-    }
+    style: sectionTitleStyle
   }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    style: {
-      fontSize: 13,
-      color: "var(--subtle)",
-      marginBottom: "1.8rem"
-    }
+    style: sectionSubStyle
   }, sub)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
     to: linkTo,
     style: allLinkStyle
   }, linkLabel));
 }
 
-/* ── Styles ── */
+/* ================= STYLES (IMPROVED READABILITY) ================= */
+
 const heroStyle = {
   maxWidth: "var(--max-w)",
   margin: "0 auto",
-  padding: "5rem 2rem 4rem",
+  padding: "6rem 2rem 4rem",
   display: "grid",
   gridTemplateColumns: "1fr auto",
-  gap: "2rem",
+  gap: "2.5rem",
   alignItems: "start"
 };
-const heroTextStyle = {
-  animation: "none"
-};
 const h1Style = {
-  fontFamily: "var(--serif)",
-  fontSize: "clamp(2.2rem,5vw,3rem)",
+  fontSize: "clamp(2.4rem, 6vw, 4.5rem)",
   fontWeight: 400,
-  lineHeight: 1.15,
-  marginBottom: "1.2rem",
+  lineHeight: 1.05,
+  marginBottom: "1rem",
   color: "var(--text)"
 };
 const h2Style = {
-  fontFamily: "var(--serif)",
-  fontSize: "clamp(2.1rem ,5vw,3rem)",
-  fontWeight: 350,
-  lineHeight: 1.0,
-  marginBottom: "1.1rem",
-  color: "var(--text)"
+  fontSize: "clamp(1.4rem, 3vw, 2.2rem)",
+  fontWeight: 300,
+  marginBottom: "1rem",
+  color: "var(--muted)"
 };
 const heroDescStyle = {
   color: "var(--muted)",
-  fontSize: 15,
+  fontSize: "clamp(16px, 1.1vw, 18px)",
   lineHeight: 1.75,
-  maxWidth: 480,
-  marginBottom: "0.8rem"
+  maxWidth: 650,
+  marginBottom: "1rem"
 };
 const heroNoteStyle = {
   fontSize: 13,
   color: "var(--subtle)",
-  marginBottom: "1.8rem"
+  marginBottom: "1.5rem"
 };
 const inlineLinkStyle = {
   color: "var(--accent)",
   textDecoration: "underline",
-  textDecorationColor: "rgba(232,113,90,0.4)",
   textUnderlineOffset: 2
 };
 const btnStyle = {
   display: "inline-flex",
   alignItems: "center",
-  gap: 7,
-  padding: "7px 16px",
+  padding: "8px 16px",
   borderRadius: 8,
-  fontSize: 13,
+  fontSize: 14,
   border: "1px solid var(--border2)",
   background: "var(--bg3)",
   color: "var(--text)",
   textDecoration: "none"
 };
 const avatarStyle = {
-  width: 88,
-  height: 88,
+  width: 90,
+  height: 90,
   borderRadius: "50%",
   background: "var(--bg3)",
   border: "1px solid var(--border2)",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  fontSize: 42,
-  flexShrink: 0,
-  marginTop: "0.5rem"
+  fontSize: 42
 };
 const contentStyle = {
   maxWidth: "var(--max-w)",
@@ -486,113 +451,126 @@ const sectionStyle = {
   borderTop: "1px solid var(--border)",
   padding: "3rem 0"
 };
+
+/* HEADER */
+const sectionHeaderStyle = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+  marginBottom: "1.2rem"
+};
+const sectionTitleStyle = {
+  fontSize: "1.2rem",
+  fontWeight: 500,
+  marginBottom: 4,
+  color: "var(--text)"
+};
+const sectionSubStyle = {
+  fontSize: 14,
+  color: "var(--subtle)"
+};
+
+/* BLOG */
 const postItemStyle = {
   display: "flex",
-  alignItems: "baseline",
-  gap: "1.5rem",
-  padding: "0.85rem 0",
+  gap: "1rem",
+  padding: "1rem 0",
   borderBottom: "1px solid var(--border)"
 };
 const postDateStyle = {
-  fontSize: 12,
+  fontSize: 13,
   color: "var(--subtle)",
   fontFamily: "var(--mono)",
-  whiteSpace: "nowrap",
-  minWidth: 88
+  minWidth: 95
 };
 const postTitleStyle = {
-  fontSize: 14,
+  fontSize: 15,
   color: "var(--text)",
-  textDecoration: "none"
+  textDecoration: "none",
+  lineHeight: 1.4
 };
 const badgeStyle = {
   fontSize: 10,
-  fontWeight: 500,
   padding: "2px 8px",
   borderRadius: 20,
   background: "linear-gradient(90deg,#e8715a,#c45a9f)",
-  color: "#fff",
-  whiteSpace: "nowrap"
+  color: "#fff"
 };
+
+/* NOTES */
 const notesGridStyle = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr))",
+  gridTemplateColumns: "repeat(auto-fill,minmax(220px,1fr))",
   gap: 12
 };
 const noteCardStyle = {
   background: "var(--bg2)",
   border: "1px solid var(--border)",
   borderRadius: 10,
-  padding: "1rem 1.1rem",
-  textDecoration: "none",
-  display: "block"
+  padding: "1.2rem",
+  textDecoration: "none"
 };
 const noteTagStyle = {
-  fontSize: 11,
+  fontSize: 12,
   color: "var(--subtle)",
-  fontFamily: "var(--mono)",
-  marginBottom: "0.4rem"
+  marginBottom: "0.5rem"
 };
 const noteTitleStyle = {
-  fontSize: 13.5,
+  fontSize: 15,
   color: "var(--text)",
-  lineHeight: 1.45
+  lineHeight: 1.5
 };
 const noteDateStyle = {
-  fontSize: 11,
+  fontSize: 12,
   color: "var(--subtle)",
-  marginTop: "0.6rem",
-  fontFamily: "var(--mono)"
+  marginTop: "0.6rem"
 };
+
+/* PROJECTS */
 const projectItemStyle = {
   display: "flex",
-  alignItems: "flex-start",
   justifyContent: "space-between",
   gap: "1rem",
   padding: "1rem 0",
   borderBottom: "1px solid var(--border)"
 };
 const projectNameStyle = {
-  fontSize: 14,
+  fontSize: 15,
   fontWeight: 500,
   color: "var(--text)",
   textDecoration: "none",
   display: "flex",
-  alignItems: "center",
   gap: 6,
-  marginBottom: "0.25rem"
+  marginBottom: "0.3rem"
+};
+const projectDescStyle = {
+  fontSize: 14,
+  color: "var(--muted)",
+  lineHeight: 1.6
 };
 const tagStyle = {
-  fontSize: 11,
-  fontFamily: "var(--mono)",
+  fontSize: 12,
   color: "var(--muted)",
   background: "var(--bg3)",
   border: "1px solid var(--border)",
-  padding: "2px 8px",
-  borderRadius: 4
+  padding: "3px 8px",
+  borderRadius: 6
 };
 const starsStyle = {
-  display: "flex",
-  alignItems: "center",
-  gap: 5,
-  fontSize: 12,
+  fontSize: 13,
   color: "var(--subtle)",
-  fontFamily: "var(--mono)",
-  whiteSpace: "nowrap",
-  marginTop: 4
+  whiteSpace: "nowrap"
 };
+
+/* LINK */
 const allLinkStyle = {
   fontSize: 13,
   color: "var(--muted)",
   textDecoration: "none",
-  display: "flex",
-  alignItems: "center",
-  gap: 4,
-  padding: "5px 12px",
-  borderRadius: 6,
+  padding: "6px 12px",
   border: "1px solid var(--border2)",
-  background: "var(--bg3)",
-  whiteSpace: "nowrap"
+  borderRadius: 6,
+  background: "var(--bg3)"
 };
 
 /***/ }),

@@ -285,7 +285,7 @@ function BlogPost({
   }, "\u2190 Back to Blog"))));
 }
 const articleStyle = {
-  maxWidth: 660,
+  maxWidth: "var(--max-w)",
   margin: "0 auto",
   padding: "4rem 2rem 6rem"
 };
@@ -298,7 +298,7 @@ const backStyle = {
 };
 const h1Style = {
   fontFamily: "var(--serif)",
-  fontSize: "clamp(1.8rem,4vw,2.5rem)",
+  fontSize: "clamp(2.4rem,6vw,4.8rem)",
   fontWeight: 400,
   color: "var(--text)",
   lineHeight: 1.2,
