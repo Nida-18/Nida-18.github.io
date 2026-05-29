@@ -1,0 +1,72 @@
+/* src/styles/global.css */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #191922;
+  --bg2:     #654188;
+  --bg3:     #886541;
+  --text:    #e8e6df;
+  --muted:   #e1dcb9;
+  --subtle:  #c1bda1;
+  --accent:  #e8715a;
+  --accent2: #7fc8a9;
+  --border:  rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --serif:   'Instrument Serif', Georgia, serif;
+  --sans:    'Geist', system-ui, sans-serif;
+  --mono:    'DM Mono', monospace;
+  --max-w:   760px;
+}
+
+[data-theme="light"] {
+  --bg:     #f9f7f2;
+  --bg2:    #f1efe8;
+  --bg3:    #e8e6df;
+  --text:   #1a1a18;
+  --muted:  #555450;
+  --subtle: #888780;
+  --border: rgba(0,0,0,0.08);
+  --border2:rgba(0,0,0,0.14);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 25px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.2s, color 0.2s;
+}
+
+a { color: inherit; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 3px; }
+
+/* Prism code highlight overrides */
+pre[class*="language-"] {
+  background: var(--bg2) !important;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-x: auto;
+  padding: 1.2rem 1.4rem;
+  margin: 1.5rem 0;
+}
+
+code[class*="language-"] { font-family: var(--mono) !important; }
+
+:not(pre) > code {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  padding: 1px 6px;
+}
