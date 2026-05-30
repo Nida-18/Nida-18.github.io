@@ -74,10 +74,10 @@ However, usage of this is not very effective since its very easy to detect as th
 
 Another approach is to implement it intrinsically, within the program code.
 
-`mov eax,fs:[00000018]`
-`mov eax, [eax+0x30`
-`cmp byte ptr [eax+0x2], 0`
-`je RunProgram`
+`mov eax,fs:[00000018]` \
+`mov eax, [eax+0x30` \
+`cmp byte ptr [eax+0x2], 0` \
+`je RunProgram` \
 `; Inconspiciously terminate program here...`
 
 Disadvantage: assumes two internal offsets in NT data structure wont change in future releases of the OS.
@@ -96,10 +96,10 @@ Supports different types of information requests, one such is *SystemKernelDebug
 
 Data structure returned by the SystemKernelDebuggerInformation request:
 
-`tyepedef struct _SYSTEM_KERNEL_DEBUGGER_INFORMATION(`
-  `BOOLEAN DebuggerEnabled;`
-  `BOOLEAN DebuggerNotPresent;`
-`) _SYSTEM_KERNEL_DEBUGGER_INFORMATION, `
+`tyepedef struct _SYSTEM_KERNEL_DEBUGGER_INFORMATION(` \
+  `BOOLEAN DebuggerEnabled;` \
+  `BOOLEAN DebuggerNotPresent;` \
+`) _SYSTEM_KERNEL_DEBUGGER_INFORMATION, ` \
 `* PSYSTEM_KERNEL_DEBUGGER_INFORMATION;`
 
 Only serial connection debugger such as KD or WinDbg will be detected.
@@ -118,4 +118,117 @@ However, its operationally expensive.
 This don't detect or prevent hardware breakpoints, because they don't modify the program code.
 
 # Confusing Disassemblers
+In processor architectures that use variable length instruction, such as IA-32 processors, disassemblers can be tricked into incorrectly treating invalid data as the beginning of an instruction.
 
+Consider the following inline assembler sequence:
+
+`_asm` \
+`{` \
+`Some Code ...` \
+`jmp After` \
+`After: ` \
+`mov eax, [SomeVariable]` \
+`push eax` \
+`call AFunction` \
+`}`
+
+Memory code:
+
+Address    Bytes \
+
+`40101D     EB 01` \
+`40101F     0F` \
+`401020     8B 45 FC` \
+`401023     50` \
+`401024     E8 D7 FF FF FF` 
+
+## Linear Sweep Disassemblers
+Disassembles instruction sequentially in the entire module.
+
+NuMega SoftICE Outputs as follows:\
+`0040101D  JMP     00401020` \
+`0040101F  JNP     E8910C6A` \
+`00401025  XLAT` \
+`00401026  INVALID` \
+`00401028  JMP    FAR [EAX-24]` \
+`0040102B  PUSHAD` \
+`0040102C  INC    EAX`
+
+This disassembler is completely baffled by the junk byte (0F).
+
+### Why 0x0F?
+In x86 assembly, 0F is usually a prefix byte that begins a two byte instruction
+So once debugger encounters 0F, it expects another byte after it.
+
+### What SoftICE sees?
+Instruction one: EB -> Jump short (jump to near location using 1-byte signed offset)
+               &nbsp;  01 -> 1 Byte jump
+               &nbsp;  Current position + offset
+              &nbsp;   40101F + 1 = 401020
+              &nbsp;  **JMP 401020**
+Instruction two: 0F -> start of 2 Byte opcode
+
+Hence, SoftICE grabs *0F 8B* as second instruction
+            &nbsp;  8B -> JNP
+             &nbsp; Since JNP takes 6 Bytes
+             &nbsp; 8B 45 FC 50 E8 is taken as one giant instruction
+             &nbsp; **JNP XXXXXX**
+
+Once one instruction line is messed up, a domino effect takes over, and the entire module is wrongly disassembled.
+
+## Recursive Traversal Disassemblers
+Instructions are analyzed by traversing instruction while following the control flow.
+
+OllyDbg Outputs as follows:\
+`0040101D EB 01       JMP SHORT disasmtest.0040120` \
+`004010F  0F          DB 0F` \
+`00401020 8B45 FC     MOV EAX, DWORD PTR SS:[EBP-4]` \
+`00401023 50          PUSH EAX` \
+`00401024 E8 D7FFFFFF CALL disasmtest.401000`
+
+Previous trick fails here, as it correctly disassembles, since it follows the execution order. 
+
+### Using conditional jump
+Instead of \
+`jmp After` \
+we use:\
+`mov eax,2` \
+`cmp eax, 2` \
+`je After` 
+
+At run time: 2==2, so jump is always taken
+However, disassembler doesn't execute the code. It only sees `je After`; which means Maybe jump, Maybe don't jump, hence two possible paths:
+
+`mov eax,2` \
+`cmp eax, 2` \
+`je After`  \
+`_emit 0x0F` \
+`After: ` \
+`mov eax, [SomeVariable]` \
+`push eax` \
+`call AFunction` 
+
+Disassembler sees:
+Branch 1: Jump taken \
+     &nbsp;     `After: ` \
+        &nbsp;  `mov eax, [SomeVariable]` \
+       &nbsp;   `push eax` \
+       &nbsp;   `call AFunction` 
+       &nbsp;   All okay
+
+Branch 2: Jump not taken \
+         &nbsp; Encounters x0F
+         &nbsp; Tries decoding as **0F 8B 45 FC 50 E8**
+        &nbsp;  Leading to garbage output
+
+Disassembler is not confused as to which path is real. It may display junk path as code.
+
+### Opaque Predicate?
+Condition whose result is easily known to programmers but difficult for disassembler to determine.
+
+Complex predicates are used.
+
+`imul eax,7` \
+`xor eax,12345678h` \
+`rol eax,5` \
+`cmp eax,0AABBCCDDh` 
