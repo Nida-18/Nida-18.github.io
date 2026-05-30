@@ -62,11 +62,11 @@ export default function Project({ data }) {
 
 const wrapStyle = { maxWidth: "var(--max-w)", margin: "0 auto", padding: "4rem 2rem 6rem" }
 const h1Style = { fontFamily: "var(--serif)", fontSize: "2.2rem", fontWeight: 400, color: "var(--text)", marginBottom: 8 }
-const subStyle = { fontSize: 13, color: "var(--subtle)" }
+const subStyle = { fontSize: 17, color: "var(--subtle)" }
 const itemStyle = { display: "flex", gap: "1.5rem", padding: "1.2rem 0", borderBottom: "1px solid var(--border)", alignItems: "flex-start" }
 const metaStyle = { display: "flex", flexDirection: "column", gap: 4, minWidth: 88 }
-const dateStyle = { fontSize: 13, color: "var(--subtle)", fontFamily: "var(--mono)" }
-const readStyle = { fontSize: 12, color: "var(--subtle)", fontFamily: "var(--mono)" }
-const titleStyle = { fontSize: 17, color: "var(--text)", textDecoration: "none", fontWeight: 400 }
-const descStyle = { fontSize: 15, color: "var(--muted)", marginTop: 2, lineHeight: 1.6 }
+const dateStyle = { fontSize: 15, color: "var(--subtle)", fontFamily: "var(--mono)" }
+const readStyle = { fontSize: 13, color: "var(--subtle)", fontFamily: "var(--mono)" }
+const titleStyle = { fontSize: 19, color: "var(--text)", textDecoration: "none", fontWeight: 400 }
+const descStyle = { fontSize: 16, color: "var(--muted)", marginTop: 2, lineHeight: 1.6 }
 const badgeStyle = { fontSize: 10, fontWeight: 500, padding: "2px 8px", borderRadius: 20, background: "linear-gradient(90deg,#e8715a,#c45a9f)", color: "#fff" }

@@ -68,7 +68,8 @@ export default function Note({ data }) {
 /* ================= STYLES ================= */
 
 const articleStyle = {
-  maxWidth: 720,
+  width: "100%",
+  maxWidth: "1020px",
   margin: "0 auto",
   padding: "4rem 1.5rem 6rem",
 }
@@ -91,7 +92,7 @@ const tagRowStyle = {
 }
 
 const tagStyle = {
-  fontSize: 11,
+  fontSize: 14,
   color: "var(--muted)",
   background: "var(--bg3)",
   border: "1px solid var(--border)",

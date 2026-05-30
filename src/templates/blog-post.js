@@ -48,8 +48,12 @@ export default function BlogPost({ data }) {
     </Layout>
   )
 }
-
-const articleStyle = { maxWidth: "var(--max-w)", margin: "0 auto", padding: "4rem 2rem 6rem" }
+const articleStyle = {
+  width: "100%",
+  maxWidth: "1020px",
+  margin: "0 auto",
+  padding: "4rem 1.5rem 6rem",
+}
 const backStyle = { fontSize: 13, color: "var(--muted)", textDecoration: "none", display: "inline-block", marginBottom: "1.5rem" }
 const h1Style = { fontFamily: "var(--serif)", fontSize: "clamp(2.4rem,6vw,4.8rem)", fontWeight: 400, color: "var(--text)", lineHeight: 1.2, marginBottom: "0.75rem" }
 const descStyle = { fontSize: 16, color: "var(--muted)", marginBottom: "1rem", lineHeight: 1.6 }

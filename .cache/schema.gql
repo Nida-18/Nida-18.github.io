@@ -1,4 +1,4 @@
-### Type definitions saved at 2026-05-29T17:51:18.918Z ###
+### Type definitions saved at 2026-05-30T08:25:47.015Z ###
 
 enum RemoteFileFit {
   COVER
@@ -380,7 +380,7 @@ type MarkdownRemarkFrontmatter {
   stars: String
   url: String
   isNew: Boolean
-  tag: [String]
+  tag: String
 }
 
 type MarkdownRemarkFields {

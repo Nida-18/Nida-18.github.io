@@ -112,7 +112,7 @@ const navLinksStyle = {
 const navLinkStyle = {
   display: "flex", alignItems: "center", gap: 6,
   padding: "5px 10px", borderRadius: 6,
-  fontSize: 13, color: "var(--muted)", textDecoration: "none",
+  fontSize: 15, color: "var(--muted)", textDecoration: "none",
 }
 const themeBtnStyle = {
   width: 32, height: 32, borderRadius: "50%",

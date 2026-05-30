@@ -460,13 +460,13 @@ const sectionHeaderStyle = {
   marginBottom: "1.2rem"
 };
 const sectionTitleStyle = {
-  fontSize: "1.2rem",
+  fontSize: "1.7rem",
   fontWeight: 500,
   marginBottom: 4,
   color: "var(--text)"
 };
 const sectionSubStyle = {
-  fontSize: 14,
+  fontSize: 17,
   color: "var(--subtle)"
 };
 
@@ -478,19 +478,19 @@ const postItemStyle = {
   borderBottom: "1px solid var(--border)"
 };
 const postDateStyle = {
-  fontSize: 13,
+  fontSize: 15,
   color: "var(--subtle)",
   fontFamily: "var(--mono)",
   minWidth: 95
 };
 const postTitleStyle = {
-  fontSize: 15,
+  fontSize: 17,
   color: "var(--text)",
   textDecoration: "none",
   lineHeight: 1.4
 };
 const badgeStyle = {
-  fontSize: 10,
+  fontSize: 11,
   padding: "2px 8px",
   borderRadius: 20,
   background: "linear-gradient(90deg,#e8715a,#c45a9f)",
@@ -511,12 +511,12 @@ const noteCardStyle = {
   textDecoration: "none"
 };
 const noteTitleStyle = {
-  fontSize: 15,
+  fontSize: 17,
   color: "var(--text)",
   lineHeight: 1.5
 };
 const noteDateStyle = {
-  fontSize: 12,
+  fontSize: 15,
   color: "var(--subtle)",
   marginTop: "0.6rem"
 };
@@ -530,7 +530,7 @@ const projectItemStyle = {
   borderBottom: "1px solid var(--border)"
 };
 const projectNameStyle = {
-  fontSize: 15,
+  fontSize: 17,
   fontWeight: 500,
   color: "var(--text)",
   textDecoration: "none",
@@ -539,12 +539,12 @@ const projectNameStyle = {
   marginBottom: "0.3rem"
 };
 const projectDescStyle = {
-  fontSize: 14,
+  fontSize: 15,
   color: "var(--muted)",
   lineHeight: 1.6
 };
 const tagStyle = {
-  fontSize: 7,
+  fontSize: 11,
   color: "var(--muted)",
   background: "var(--bg3)",
   border: "1px solid var(--border)",

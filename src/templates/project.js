@@ -52,7 +52,12 @@ export default function ProjectQuery({ data }) {
   )
 }
 
-const articleStyle = { maxWidth: 660, margin: "0 auto", padding: "4rem 2rem 6rem" }
+const articleStyle = {
+  width: "100%",
+  maxWidth: "1020px",
+  margin: "0 auto",
+  padding: "4rem 1.5rem 6rem",
+}
 const backStyle = { fontSize: 13, color: "var(--muted)", textDecoration: "none", display: "inline-block", marginBottom: "1.5rem" }
 const h1Style = { fontFamily: "var(--serif)", fontSize: "clamp(1.8rem,4vw,2.5rem)", fontWeight: 400, color: "var(--text)", lineHeight: 1.2, marginBottom: "0.75rem" }
 const descStyle = { fontSize: 16, color: "var(--muted)", marginBottom: "1rem", lineHeight: 1.6 }
