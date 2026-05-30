@@ -57,7 +57,7 @@ const articleStyle = {
 const backStyle = { fontSize: 13, color: "var(--muted)", textDecoration: "none", display: "inline-block", marginBottom: "1.5rem" }
 const h1Style = { fontFamily: "var(--serif)", fontSize: "clamp(2.4rem,6vw,4.8rem)", fontWeight: 400, color: "var(--text)", lineHeight: 1.2, marginBottom: "0.75rem" }
 const descStyle = { fontSize: 16, color: "var(--muted)", marginBottom: "1rem", lineHeight: 1.6 }
-const metaStyle = { display: "flex", gap: 8, fontSize: 12, color: "var(--subtle)", fontFamily: "var(--mono)" }
+const metaStyle = { display: "flex", gap: 8, fontSize: 15, color: "var(--subtle)", fontFamily: "var(--mono)" }
 const footerStyle = { marginTop: "3rem", paddingTop: "2rem", borderTop: "1px solid var(--border)" }
 const proseStyle = {
   color: "var(--muted)",

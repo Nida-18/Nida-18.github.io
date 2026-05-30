@@ -173,7 +173,7 @@ const navLinkStyle = {
   gap: 6,
   padding: "5px 10px",
   borderRadius: 6,
-  fontSize: 13,
+  fontSize: 15,
   color: "var(--muted)",
   textDecoration: "none"
 };
@@ -271,13 +271,13 @@ const headerStyle = {
 };
 const h1Style = {
   fontFamily: "var(--serif)",
-  fontSize: "clamp(2rem, 4vw, 2.6rem)",
+  fontSize: "2.2rem",
   fontWeight: 400,
   color: "var(--text)",
   marginBottom: 6
 };
 const subStyle = {
-  fontSize: 14,
+  fontSize: 17,
   color: "var(--subtle)",
   lineHeight: 1.6
 };
@@ -302,13 +302,13 @@ const cardStyle = {
 
 /* TEXT */
 const titleStyle = {
-  fontSize: 15,
+  fontSize: 19,
   color: "var(--text)",
-  lineHeight: 1.5,
+  lineHeight: 1.3,
   marginBottom: "0.5rem"
 };
 const dateStyle = {
-  fontSize: 12,
+  fontSize: 14,
   color: "var(--subtle)",
   fontFamily: "var(--mono)"
 };

@@ -173,7 +173,7 @@ const navLinkStyle = {
   gap: 6,
   padding: "5px 10px",
   borderRadius: 6,
-  fontSize: 13,
+  fontSize: 15,
   color: "var(--muted)",
   textDecoration: "none"
 };
@@ -282,9 +282,10 @@ function ProjectQuery({
   }, "\u2190 Back to Projects"))));
 }
 const articleStyle = {
-  maxWidth: 660,
+  width: "100%",
+  maxWidth: "1020px",
   margin: "0 auto",
-  padding: "4rem 2rem 6rem"
+  padding: "4rem 1.5rem 6rem"
 };
 const backStyle = {
   fontSize: 13,
@@ -310,7 +311,7 @@ const descStyle = {
 const metaStyle = {
   display: "flex",
   gap: 8,
-  fontSize: 12,
+  fontSize: 15,
   color: "var(--subtle)",
   fontFamily: "var(--mono)"
 };

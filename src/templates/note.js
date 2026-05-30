@@ -9,7 +9,7 @@ export const query = graphql`
       frontmatter {
         title
         date(formatString: "MMMM YYYY")
-        tag
+        tags
       }
     }
   }
@@ -17,12 +17,7 @@ export const query = graphql`
 
 export default function Note({ data }) {
   const note = data.markdownRemark
-  const { title, date, tag } = note.frontmatter
-
-  const tags =
-    Array.isArray(tag)
-      ? tag
-      : (tag || "").split(",")
+  const { title, date, tags=[] } = note.frontmatter
 
   return (
     <Layout>
@@ -92,7 +87,7 @@ const tagRowStyle = {
 }
 
 const tagStyle = {
-  fontSize: 14,
+  fontSize: 15,
   color: "var(--muted)",
   background: "var(--bg3)",
   border: "1px solid var(--border)",
@@ -113,7 +108,7 @@ const h1Style = {
 
 /* META */
 const metaStyle = {
-  fontSize: 12,
+  fontSize: 14,
   color: "var(--subtle)",
   fontFamily: "var(--mono)",
   marginBottom: "2rem",

@@ -1,8 +1,11 @@
 ---
 title: "Introduction to Anti Reversing"
 date: "2026-05-29"
-tag: Malware Analysis, Defensive Security, Cyber Security
---- 
+tags: 
+- Malware Analysis
+- Cyber security 
+- Defensive security"
+---
 
 # What is Anti Reversing?
 Process of making an application immune to reversing. 
@@ -37,7 +40,7 @@ Generic name for a number of techniques that reduces static analysis possibiliti
 - logic
 - data 
 and organised such that it becomes far less readable while keeping identical functionality.
-
+ 
 3. Embedding Antidebugger code
 Intentionally perform operations within program that damage or disable a debugger, if one is attached. Some of these are simply detecting presence of debugger and terminating the program.
 
@@ -66,4 +69,53 @@ Anti-debugger tricks are also little risky, since it can give false positives an
 Once a breakpoint is hit, user usually step through the code in order to analyse it. Which means single instruction is executed. On IA-32 processor, trap flag (TF) in the EFLAGS register is used. This generates interrupt after each executed instruction.
 
 ### IsDebuggerPresent API 
+Windows API that can be used to detect user mode debuggers such as OllyDbg and WinDbg. It accesses the current process's Program Environment Block to determine the same. 
+However, usage of this is not very effective since its very easy to detect as the name leaves no place for doubt. 
+
+Another approach is to implement it intrinsically, within the program code.
+
+`mov eax,fs:[00000018]`
+`mov eax, [eax+0x30`
+`cmp byte ptr [eax+0x2], 0`
+`je RunProgram`
+`; Inconspiciously terminate program here...`
+
+Disadvantage: assumes two internal offsets in NT data structure wont change in future releases of the OS.
+
+*Offset +30 from Thread Environment Block DS which points to current process's PEB*
+
+*Byte at offset +2 which indicates whether debugger is present or not.*
+
+Also, this implementation would require the ability for the assembly code to be incorporated into the program.
+
+### SystemKernelDebuggerInformation
+*NTQuerySystemInformation* is a native API to determine if a kernel debugger is attached.
+Supports different types of information requests, one such is *SystemKernelDebuggerInformation*, which obtains information from the kernel if debugger is attached.
+
+`ZwQuerySystemInformation(SystemKernelDebuggerInformation, (PVOID) &DebuggerInfo, sizeof(DebuggerInfo), &ulReturnedLength);`
+
+Data structure returned by the SystemKernelDebuggerInformation request:
+
+`tyepedef struct _SYSTEM_KERNEL_DEBUGGER_INFORMATION(`
+  `BOOLEAN DebuggerEnabled;`
+  `BOOLEAN DebuggerNotPresent;`
+`) _SYSTEM_KERNEL_DEBUGGER_INFORMATION, `
+`* PSYSTEM_KERNEL_DEBUGGER_INFORMATION;`
+
+Only serial connection debugger such as KD or WinDbg will be detected.
+
+### Detecting SoftICE using single step interrupt
+Reversing NuMega SoftICE. Since SoftICE uses `int 1` for  single stepping through program, trick is to set up own handler for it in *interrupt descriptor table*. The program installs an exception handler and invokes `int 1`, if exception code is anything but the conventional access violation exception, SoftICE is running.
+
+### The trap flag
+Enabling the trap flag in current process and check whether an execution is raised. If not, it can be assumed that the debugger has 'swallowed' it and the program is being traced.
+This detects all kinds of debuggers.
+
+### Code Checksums
+Pre-calculate a checksum for functions within the program and have the function randomly check if modification has occurred. 
+However, its operationally expensive.
+
+This don't detect or prevent hardware breakpoints, because they don't modify the program code.
+
+# Confusing Disassemblers
 

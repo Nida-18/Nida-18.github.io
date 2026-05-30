@@ -173,7 +173,7 @@ const navLinkStyle = {
   gap: 6,
   padding: "5px 10px",
   borderRadius: 6,
-  fontSize: 13,
+  fontSize: 15,
   color: "var(--muted)",
   textDecoration: "none"
 };
@@ -238,7 +238,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const query = "505773614";
+const query = "718438288";
 function Note({
   data
 }) {
@@ -246,9 +246,9 @@ function Note({
   const {
     title,
     date,
-    tag
+    tags
   } = note.frontmatter;
-  const tags = Array.isArray(tag) ? tag : (tag || "").split(",");
+  const allTags = Array.isArray(tags) ? tags : (tags || "").split(",");
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Layout__WEBPACK_IMPORTED_MODULE_2__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("article", {
     style: articleStyle
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(gatsby__WEBPACK_IMPORTED_MODULE_1__.Link, {
@@ -256,7 +256,7 @@ function Note({
     style: backStyle
   }, "\u2190 All Notes"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     style: tagRowStyle
-  }, tags.map(t => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+  }, allTags.map(t => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     key: t,
     style: tagStyle
   }, t.trim()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
@@ -280,7 +280,8 @@ function Note({
 /* ================= STYLES ================= */
 
 const articleStyle = {
-  maxWidth: 720,
+  width: "100%",
+  maxWidth: "1020px",
   margin: "0 auto",
   padding: "4rem 1.5rem 6rem"
 };
@@ -302,7 +303,7 @@ const tagRowStyle = {
   marginBottom: "1rem"
 };
 const tagStyle = {
-  fontSize: 11,
+  fontSize: 15,
   color: "var(--muted)",
   background: "var(--bg3)",
   border: "1px solid var(--border)",
@@ -323,7 +324,7 @@ const h1Style = {
 
 /* META */
 const metaStyle = {
-  fontSize: 12,
+  fontSize: 14,
   color: "var(--subtle)",
   fontFamily: "var(--mono)",
   marginBottom: "2rem"

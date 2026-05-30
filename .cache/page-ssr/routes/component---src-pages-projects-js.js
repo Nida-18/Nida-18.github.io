@@ -173,7 +173,7 @@ const navLinkStyle = {
   gap: 6,
   padding: "5px 10px",
   borderRadius: 6,
-  fontSize: 13,
+  fontSize: 15,
   color: "var(--muted)",
   textDecoration: "none"
 };
@@ -291,7 +291,7 @@ const h1Style = {
   marginBottom: 8
 };
 const subStyle = {
-  fontSize: 13,
+  fontSize: 17,
   color: "var(--subtle)"
 };
 const itemStyle = {
@@ -308,23 +308,23 @@ const metaStyle = {
   minWidth: 88
 };
 const dateStyle = {
-  fontSize: 13,
+  fontSize: 15,
   color: "var(--subtle)",
   fontFamily: "var(--mono)"
 };
 const readStyle = {
-  fontSize: 12,
+  fontSize: 13,
   color: "var(--subtle)",
   fontFamily: "var(--mono)"
 };
 const titleStyle = {
-  fontSize: 17,
+  fontSize: 19,
   color: "var(--text)",
   textDecoration: "none",
   fontWeight: 400
 };
 const descStyle = {
-  fontSize: 15,
+  fontSize: 16,
   color: "var(--muted)",
   marginTop: 2,
   lineHeight: 1.6

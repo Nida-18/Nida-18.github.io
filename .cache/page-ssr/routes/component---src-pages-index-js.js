@@ -173,7 +173,7 @@ const navLinkStyle = {
   gap: 6,
   padding: "5px 10px",
   borderRadius: 6,
-  fontSize: 13,
+  fontSize: 15,
   color: "var(--muted)",
   textDecoration: "none"
 };
