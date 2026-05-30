@@ -58,10 +58,10 @@ Breakpoint that the processor itself manages. It simply knows when a specific me
 <p>Windows API that can be used to detect user mode debuggers such as OllyDbg and WinDbg. It accesses the current process's Program Environment Block to determine the same.
 However, usage of this is not very effective since its very easy to detect as the name leaves no place for doubt.</p>
 <p>Another approach is to implement it intrinsically, within the program code.</p>
-<p><code class="language-text">mov eax,fs:[00000018]</code>
-<code class="language-text">mov eax, [eax+0x30</code>
-<code class="language-text">cmp byte ptr [eax+0x2], 0</code>
-<code class="language-text">je RunProgram</code>
+<p><code class="language-text">mov eax,fs:[00000018]</code> <br>
+<code class="language-text">mov eax, [eax+0x30</code> <br>
+<code class="language-text">cmp byte ptr [eax+0x2], 0</code> <br>
+<code class="language-text">je RunProgram</code> <br>
 <code class="language-text">; Inconspiciously terminate program here...</code></p>
 <p>Disadvantage: assumes two internal offsets in NT data structure wont change in future releases of the OS.</p>
 <p><em>Offset +30 from Thread Environment Block DS which points to current process's PEB</em></p>
@@ -72,10 +72,10 @@ However, usage of this is not very effective since its very easy to detect as th
 Supports different types of information requests, one such is <em>SystemKernelDebuggerInformation</em>, which obtains information from the kernel if debugger is attached.</p>
 <p><code class="language-text">ZwQuerySystemInformation(SystemKernelDebuggerInformation, (PVOID) &amp;DebuggerInfo, sizeof(DebuggerInfo), &amp;ulReturnedLength);</code></p>
 <p>Data structure returned by the SystemKernelDebuggerInformation request:</p>
-<p><code class="language-text">tyepedef struct _SYSTEM_KERNEL_DEBUGGER_INFORMATION(</code>
-<code class="language-text">BOOLEAN DebuggerEnabled;</code>
-<code class="language-text">BOOLEAN DebuggerNotPresent;</code>
-<code class="language-text">) _SYSTEM_KERNEL_DEBUGGER_INFORMATION, </code>
+<p><code class="language-text">tyepedef struct _SYSTEM_KERNEL_DEBUGGER_INFORMATION(</code> <br>
+<code class="language-text">BOOLEAN DebuggerEnabled;</code> <br>
+<code class="language-text">BOOLEAN DebuggerNotPresent;</code> <br>
+<code class="language-text">) _SYSTEM_KERNEL_DEBUGGER_INFORMATION, </code> <br>
 <code class="language-text">* PSYSTEM_KERNEL_DEBUGGER_INFORMATION;</code></p>
 <p>Only serial connection debugger such as KD or WinDbg will be detected.</p>
 <h3>Detecting SoftICE using single step interrupt</h3>
@@ -87,10 +87,100 @@ This detects all kinds of debuggers.</p>
 <p>Pre-calculate a checksum for functions within the program and have the function randomly check if modification has occurred.
 However, its operationally expensive.</p>
 <p>This don't detect or prevent hardware breakpoints, because they don't modify the program code.</p>
-<h1>Confusing Disassemblers</h1></div><footer style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)"><a style="font-size:13px;color:var(--muted);text-decoration:none;display:inline-block;margin-bottom:1.2rem" href="/notes/">← Back to Notes</a></footer></article></main><footer style="border-top:1px solid var(--border)"><div style="max-width:var(--max-w);margin:0 auto;padding:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem"><p style="font-size:12px;color:var(--subtle)">© <!-- -->2026<!-- --> Nida. All rights reserved.</p><div style="display:flex;gap:16px"><a href="https://github.com/Nida-18" style="font-size:12px;color:var(--muted);text-decoration:none">GitHub</a><a href="https://twitter.com/yourusername" style="font-size:12px;color:var(--muted);text-decoration:none">Twitter</a><a href="mailto:nidafatima2645@gmail.com" style="font-size:12px;color:var(--muted);text-decoration:none">Email</a></div></div></footer></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/anti-reversing/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+<h1>Confusing Disassemblers</h1>
+<p>In processor architectures that use variable length instruction, such as IA-32 processors, disassemblers can be tricked into incorrectly treating invalid data as the beginning of an instruction.</p>
+<p>Consider the following inline assembler sequence:</p>
+<p><code class="language-text">_asm</code> <br>
+<code class="language-text">{</code> <br>
+<code class="language-text">Some Code ...</code> <br>
+<code class="language-text">jmp After</code> <br>
+<code class="language-text">After: </code> <br>
+<code class="language-text">mov eax, [SomeVariable]</code> <br>
+<code class="language-text">push eax</code> <br>
+<code class="language-text">call AFunction</code> <br>
+<code class="language-text">}</code></p>
+<p>Memory code:</p>
+<p>Address    Bytes \</p>
+<p><code class="language-text">40101D     EB 01</code> <br>
+<code class="language-text">40101F     0F</code> <br>
+<code class="language-text">401020     8B 45 FC</code> <br>
+<code class="language-text">401023     50</code> <br>
+<code class="language-text">401024     E8 D7 FF FF FF</code></p>
+<h2>Linear Sweep Disassemblers</h2>
+<p>Disassembles instruction sequentially in the entire module.</p>
+<p>NuMega SoftICE Outputs as follows:<br>
+<code class="language-text">0040101D  JMP     00401020</code> <br>
+<code class="language-text">0040101F  JNP     E8910C6A</code> <br>
+<code class="language-text">00401025  XLAT</code> <br>
+<code class="language-text">00401026  INVALID</code> <br>
+<code class="language-text">00401028  JMP    FAR [EAX-24]</code> <br>
+<code class="language-text">0040102B  PUSHAD</code> <br>
+<code class="language-text">0040102C  INC    EAX</code></p>
+<p>This disassembler is completely baffled by the junk byte (0F).</p>
+<h3>Why 0x0F?</h3>
+<p>In x86 assembly, 0F is usually a prefix byte that begins a two byte instruction
+So once debugger encounters 0F, it expects another byte after it.</p>
+<h3>What SoftICE sees?</h3>
+<p>Instruction one: EB -> Jump short (jump to near location using 1-byte signed offset)
+   01 -> 1 Byte jump
+   Current position + offset
+    40101F + 1 = 401020
+   <strong>JMP 401020</strong>
+Instruction two: 0F -> start of 2 Byte opcode</p>
+<p>Hence, SoftICE grabs <em>0F 8B</em> as second instruction
+   8B -> JNP
+  Since JNP takes 6 Bytes
+  8B 45 FC 50 E8 is taken as one giant instruction
+  <strong>JNP XXXXXX</strong></p>
+<p>Once one instruction line is messed up, a domino effect takes over, and the entire module is wrongly disassembled.</p>
+<h2>Recursive Traversal Disassemblers</h2>
+<p>Instructions are analyzed by traversing instruction while following the control flow.</p>
+<p>OllyDbg Outputs as follows:<br>
+<code class="language-text">0040101D EB 01       JMP SHORT disasmtest.0040120</code> <br>
+<code class="language-text">004010F  0F          DB 0F</code> <br>
+<code class="language-text">00401020 8B45 FC     MOV EAX, DWORD PTR SS:[EBP-4]</code> <br>
+<code class="language-text">00401023 50          PUSH EAX</code> <br>
+<code class="language-text">00401024 E8 D7FFFFFF CALL disasmtest.401000</code></p>
+<p>Previous trick fails here, as it correctly disassembles, since it follows the execution order.</p>
+<h3>Using conditional jump</h3>
+<p>Instead of <br>
+<code class="language-text">jmp After</code> <br>
+we use:<br>
+<code class="language-text">mov eax,2</code> <br>
+<code class="language-text">cmp eax, 2</code> <br>
+<code class="language-text">je After</code></p>
+<p>At run time: 2==2, so jump is always taken
+However, disassembler doesn't execute the code. It only sees <code class="language-text">je After</code>; which means Maybe jump, Maybe don't jump, hence two possible paths:</p>
+<p><code class="language-text">mov eax,2</code> <br>
+<code class="language-text">cmp eax, 2</code> <br>
+<code class="language-text">je After</code>  <br>
+<code class="language-text">_emit 0x0F</code> <br>
+<code class="language-text">After: </code> <br>
+<code class="language-text">mov eax, [SomeVariable]</code> <br>
+<code class="language-text">push eax</code> <br>
+<code class="language-text">call AFunction</code></p>
+<p>Disassembler sees:
+Branch 1: Jump taken <br>
+<code class="language-text">After: </code> <br>
+<code class="language-text">mov eax, [SomeVariable]</code> <br>
+<code class="language-text">push eax</code> <br>
+<code class="language-text">call AFunction</code>
+    All okay</p>
+<p>Branch 2: Jump not taken <br>
+Encounters x0F
+  Tries decoding as <strong>0F 8B 45 FC 50 E8</strong>
+   Leading to garbage output</p>
+<p>Disassembler is not confused as to which path is real. It may display junk path as code.</p>
+<h3>Opaque Predicate?</h3>
+<p>Condition whose result is easily known to programmers but difficult for disassembler to determine.</p>
+<p>Complex predicates are used.</p>
+<p><code class="language-text">imul eax,7</code> <br>
+<code class="language-text">xor eax,12345678h</code> <br>
+<code class="language-text">rol eax,5</code> <br>
+<code class="language-text">cmp eax,0AABBCCDDh</code></p></div><footer style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)"><a style="font-size:13px;color:var(--muted);text-decoration:none;display:inline-block;margin-bottom:1.2rem" href="/notes/">← Back to Notes</a></footer></article></main><footer style="border-top:1px solid var(--border)"><div style="max-width:var(--max-w);margin:0 auto;padding:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem"><p style="font-size:12px;color:var(--subtle)">© <!-- -->2026<!-- --> Nida. All rights reserved.</p><div style="display:flex;gap:16px"><a href="https://github.com/Nida-18" style="font-size:12px;color:var(--muted);text-decoration:none">GitHub</a><a href="https://twitter.com/yourusername" style="font-size:12px;color:var(--muted);text-decoration:none">Twitter</a><a href="mailto:nidafatima2645@gmail.com" style="font-size:12px;color:var(--muted);text-decoration:none">Email</a></div></div></footer></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/anti-reversing/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
           <script
             id="gatsby-chunk-mapping"
           >
             window.___chunkMapping="{\"app\":[\"/app-3770354370cd79d4a7ce.js\"],\"component---src-pages-about-js\":[\"/component---src-pages-about-js-ec0e68deec829127943f.js\"],\"component---src-pages-blog-js\":[\"/component---src-pages-blog-js-f0b50f0b879da2e2d023.js\"],\"component---src-pages-index-js\":[\"/component---src-pages-index-js-c98fedcfe0c00010fad0.js\"],\"component---src-pages-notes-js\":[\"/component---src-pages-notes-js-a1f23906d8b5a6c5fc18.js\"],\"component---src-pages-projects-js\":[\"/component---src-pages-projects-js-89846696682afbb599ff.js\"],\"component---src-templates-blog-post-js\":[\"/component---src-templates-blog-post-js-b621632f0241aa112de5.js\"],\"component---src-templates-note-js\":[\"/component---src-templates-note-js-b8e036d261dc8825988d.js\"],\"component---src-templates-project-js\":[\"/component---src-templates-project-js-84b6acd8a11c35bb0321.js\"]}";
           </script>
-        <script>window.___webpackCompilationHash="37b3b33117ce636bbdb4";</script><script src="/webpack-runtime-dcd68050ad7a96c82977.js" async></script><script src="/framework-6c22a386140aff9ee783.js" async></script><script src="/app-3770354370cd79d4a7ce.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
+        <script>window.___webpackCompilationHash="e919ad2f1f9c1ecb2e3d";</script><script src="/webpack-runtime-dcd68050ad7a96c82977.js" async></script><script src="/framework-6c22a386140aff9ee783.js" async></script><script src="/app-3770354370cd79d4a7ce.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
