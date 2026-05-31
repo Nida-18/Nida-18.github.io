@@ -74,11 +74,14 @@ However, usage of this is not very effective since its very easy to detect as th
 
 Another approach is to implement it intrinsically, within the program code.
 
-`mov eax,fs:[00000018]` \
-`mov eax, [eax+0x30` \
-`cmp byte ptr [eax+0x2], 0` \
-`je RunProgram` \
-`; Inconspiciously terminate program here...`
+```
+mov eax,fs:[00000018]
+mov eax, [eax+0x30]
+cmp byte ptr [eax+0x2], 0
+je RunProgram
+; Inconspiciously terminate program here...
+```
+
 
 Disadvantage: assumes two internal offsets in NT data structure wont change in future releases of the OS.
 
@@ -96,11 +99,14 @@ Supports different types of information requests, one such is *SystemKernelDebug
 
 Data structure returned by the SystemKernelDebuggerInformation request:
 
-`tyepedef struct _SYSTEM_KERNEL_DEBUGGER_INFORMATION(` \
-  `BOOLEAN DebuggerEnabled;` \
-  `BOOLEAN DebuggerNotPresent;` \
-`) _SYSTEM_KERNEL_DEBUGGER_INFORMATION, ` \
-`* PSYSTEM_KERNEL_DEBUGGER_INFORMATION;`
+```
+
+tyepedef struct _SYSTEM_KERNEL_DEBUGGER_INFORMATION(
+BOOLEAN DebuggerEnabled;
+  BOOLEAN DebuggerNotPresent;
+) _SYSTEM_KERNEL_DEBUGGER_INFORMATION, 
+* PSYSTEM_KERNEL_DEBUGGER_INFORMATION;
+```
 
 Only serial connection debugger such as KD or WinDbg will be detected.
 
@@ -122,37 +128,44 @@ In processor architectures that use variable length instruction, such as IA-32 p
 
 Consider the following inline assembler sequence:
 
-`_asm` \
-`{` \
-`Some Code ...` \
-`jmp After` \
-`After: ` \
-`mov eax, [SomeVariable]` \
-`push eax` \
-`call AFunction` \
-`}`
+```
+_asm
+{
+Some Code ...
+jmp After
+After: 
+mov eax, [SomeVariable]
+push eax
+call AFunction
+}
+```
 
 Memory code:
 
 Address    Bytes \
+```
 
-`40101D     EB 01` \
-`40101F     0F` \
-`401020     8B 45 FC` \
-`401023     50` \
-`401024     E8 D7 FF FF FF` 
+40101D     EB 01
+40101F     0F
+401020     8B 45 FC
+401023     50
+401024     E8 D7 FF FF FF 
+```
 
 ## Linear Sweep Disassemblers
 Disassembles instruction sequentially in the entire module.
 
 NuMega SoftICE Outputs as follows:\
-`0040101D  JMP     00401020` \
-`0040101F  JNP     E8910C6A` \
-`00401025  XLAT` \
-`00401026  INVALID` \
-`00401028  JMP    FAR [EAX-24]` \
-`0040102B  PUSHAD` \
-`0040102C  INC    EAX`
+```
+0040101D  JMP     00401020
+0040101F  JNP     E8910C6A
+00401025  XLAT
+00401026  INVALID
+00401028  JMP    FAR [EAX-24]
+0040102B  PUSHAD
+0040102C  INC    EAX
+```
+
 
 This disassembler is completely baffled by the junk byte (0F).
 
@@ -161,18 +174,28 @@ In x86 assembly, 0F is usually a prefix byte that begins a two byte instruction
 So once debugger encounters 0F, it expects another byte after it.
 
 ### What SoftICE sees?
-Instruction one: EB -> Jump short (jump to near location using 1-byte signed offset)
-               &nbsp;  01 -> 1 Byte jump
-               &nbsp;  Current position + offset
-              &nbsp;   40101F + 1 = 401020
-              &nbsp;  **JMP 401020**
+Instruction one:EB -> Jump short (jump to near location using 1-byte signed offset)
+ 
+```              
+                  01 -> 1 Byte jump
+                  Current position + offset
+                  40101F + 1 = 401020
+```
+
+**JMP 401020**
+
 Instruction two: 0F -> start of 2 Byte opcode
 
 Hence, SoftICE grabs *0F 8B* as second instruction
-            &nbsp;  8B -> JNP
-             &nbsp; Since JNP takes 6 Bytes
-             &nbsp; 8B 45 FC 50 E8 is taken as one giant instruction
-             &nbsp; **JNP XXXXXX**
+
+```
+                  8B -> JNP
+                  since JNP takes 6 Bytes
+                  8B 45 FC 50 E8 is taken as one giant instruction
+```
+
+
+**JNP XXXXXX**
 
 Once one instruction line is messed up, a domino effect takes over, and the entire module is wrongly disassembled.
 
@@ -180,11 +203,14 @@ Once one instruction line is messed up, a domino effect takes over, and the enti
 Instructions are analyzed by traversing instruction while following the control flow.
 
 OllyDbg Outputs as follows:\
-`0040101D EB 01       JMP SHORT disasmtest.0040120` \
-`004010F  0F          DB 0F` \
-`00401020 8B45 FC     MOV EAX, DWORD PTR SS:[EBP-4]` \
-`00401023 50          PUSH EAX` \
-`00401024 E8 D7FFFFFF CALL disasmtest.401000`
+```
+
+0040101D EB 01       JMP SHORT disasmtest.0040120
+004010F  0F          DB 0F
+00401020 8B45 FC     MOV EAX, DWORD PTR SS:[EBP-4]
+00401023 50          PUSH EAX
+00401024 E8 D7FFFFFF CALL disasmtest.401000
+```
 
 Previous trick fails here, as it correctly disassembles, since it follows the execution order. 
 
@@ -192,29 +218,36 @@ Previous trick fails here, as it correctly disassembles, since it follows the ex
 Instead of \
 `jmp After` \
 we use:\
-`mov eax,2` \
-`cmp eax, 2` \
-`je After` 
+```
+mov eax,2
+cmp eax, 2
+je After 
+```
 
 At run time: 2==2, so jump is always taken
 However, disassembler doesn't execute the code. It only sees `je After`; which means Maybe jump, Maybe don't jump, hence two possible paths:
-
-`mov eax,2` \
-`cmp eax, 2` \
-`je After`  \
-`_emit 0x0F` \
-`After: ` \
-`mov eax, [SomeVariable]` \
-`push eax` \
-`call AFunction` 
+```
+mov eax,2
+cmp eax, 2
+je After
+_emit 0x0F
+After: 
+mov eax, [SomeVariable]
+push eax
+call AFunction 
+```
 
 Disassembler sees:
 Branch 1: Jump taken \
-     &nbsp;     `After: ` \
-        &nbsp;  `mov eax, [SomeVariable]` \
-       &nbsp;   `push eax` \
-       &nbsp;   `call AFunction` 
-       &nbsp;   All okay
+```
+
+            After:
+            mov eax, [SomeVariable]
+            push eax
+            call AFunction
+```
+
+All okay
 
 Branch 2: Jump not taken \
          &nbsp; Encounters x0F
@@ -223,12 +256,94 @@ Branch 2: Jump not taken \
 
 Disassembler is not confused as to which path is real. It may display junk path as code.
 
+| Disassembler/Debugger Name | Disassembly method |
+| ------------- | -------------- | 
+| OllyDbg | Recursive traversal | 
+| NuMega SoftICE| Linear Sweep | 
+| Microsoft WinDbg| Linear Sweep | 
+| IDA Pro | Recursive traversal | 
+| PEBrowse Pro| Recursive traversal|
+
+
 ### Opaque Predicate?
 Condition whose result is easily known to programmers but difficult for disassembler to determine.
 
 Complex predicates are used.
+```
+imul eax,7
+xor eax,12345678h
+rol eax,5
+cmp eax,0AABBCCDDh 
 
-`imul eax,7` \
-`xor eax,12345678h` \
-`rol eax,5` \
-`cmp eax,0AABBCCDDh` 
+```
+
+## Application
+Creating a C++ Macros, Obfuscate(), instead of writing the predicates again and again
+```
+#define paste(a, b) a##b
+#define pastesymbols(a, b) paste(a, b)
+#define OBFUSCATE()
+ \
+_asm { mov eax, __LINE__ * 0x635186f1 };
+_asm { cmp eax, __LINE__ * 0x9cb16d48 };
+_asm { je pastesymbols(Junk,__LINE__) };
+_asm { mov eax, pastesymbols(After, __LINE__) };
+_asm { jmp eax };
+_asm { pastesymbols(Junk, __LINE__): };
+_asm { _emit (0xd8 + __LINE__ % 8) };
+_asm { pastesymbols(After, __LINE__): };
+```
+
+This macros can
+- Confuse the decompiler
+- Slow down the reverser's task
+
+However, it can't:
+- Stop experienced reverser
+- Escape automated removal
+
+# Obfuscation 
+Real code obfuscator transforms code that make it less human readable and still retain the functionality, while staying platform independent.
+
+*Potency*: Level of complexity added by the transformation 
+&emsp;Number of predicates
+&emsp;Depth of nesting in a code sequence
+
+*Resilient*: Cannot be undone
+
+**Deobfuscator**: Program that uses data flow analysis algorithms to separate wheat from the chaff.
+
+**Disadvantage**
+- Larger code
+- Slower execution time
+- Increased memory runtime consumption
+
+*Automatic Obfuscation*
+- Obfuscate the entire program
+- Performed after the program is compiled
+
+# Control Flow transformation
+Transformations that alter the order and flow of a program to reduce human readability.
+
+| Computational Transformation | Aggregation Transformation | Ordering Transformation|
+| -------------- | --------------- | -------------- |
+| Modifying codes original control flow such that its difficult to transform back to high level - removing control flow information from program or adding a new| Destroys high level structure by braking high level abstraction written during programming | Order of operations is randomized |
+
+## Opaque predicates
+
+**Concurrency Based:**
+- Background thread continuously generates values.
+- Values satisfy hidden constraints.
+- Main program checks those constraints.
+
+| Native Code                        | Bytecode                             |
+| ---------------------------------- | ------------------------------------ |
+| Data structures harder to identify | Data structures explicitly available |
+| Data-flow analysis difficult       | Easier data-flow analysis            |
+| Opaque predicates more effective   | Opaque predicates easier to detect   |
+| Focus on confusing humans          | Focus on confusing decompilers       |
+
+
+## Table Interpretation
+
+
