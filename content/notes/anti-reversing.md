@@ -4,7 +4,7 @@ date: "2026-05-29"
 tags: 
 - Malware Analysis
 - Cyber security 
-- Defensive security"
+- Defensive security
 ---
 
 # What is Anti Reversing?

@@ -4,14 +4,14 @@ const preferDefault = m => (m && m.default) || m
 
 
 exports.components = {
-  "component---cache-dev-404-page-js": preferDefault(require("/home/nida/Documents/My-Portfolio/.cache/dev-404-page.js")),
-  "component---src-pages-about-js": preferDefault(require("/home/nida/Documents/My-Portfolio/src/pages/about.js")),
-  "component---src-pages-blog-js": preferDefault(require("/home/nida/Documents/My-Portfolio/src/pages/blog.js")),
-  "component---src-pages-index-js": preferDefault(require("/home/nida/Documents/My-Portfolio/src/pages/index.js")),
-  "component---src-pages-notes-js": preferDefault(require("/home/nida/Documents/My-Portfolio/src/pages/notes.js")),
-  "component---src-pages-projects-js": preferDefault(require("/home/nida/Documents/My-Portfolio/src/pages/projects.js")),
-  "component---src-templates-blog-post-js": preferDefault(require("/home/nida/Documents/My-Portfolio/src/templates/blog-post.js")),
-  "component---src-templates-note-js": preferDefault(require("/home/nida/Documents/My-Portfolio/src/templates/note.js")),
-  "component---src-templates-project-js": preferDefault(require("/home/nida/Documents/My-Portfolio/src/templates/project.js"))
+  "component---cache-dev-404-page-js": preferDefault(require("/home/nida/Documents/Github Repos/My-Portfolio/.cache/dev-404-page.js")),
+  "component---src-pages-about-js": preferDefault(require("/home/nida/Documents/Github Repos/My-Portfolio/src/pages/about.js")),
+  "component---src-pages-blog-js": preferDefault(require("/home/nida/Documents/Github Repos/My-Portfolio/src/pages/blog.js")),
+  "component---src-pages-index-js": preferDefault(require("/home/nida/Documents/Github Repos/My-Portfolio/src/pages/index.js")),
+  "component---src-pages-notes-js": preferDefault(require("/home/nida/Documents/Github Repos/My-Portfolio/src/pages/notes.js")),
+  "component---src-pages-projects-js": preferDefault(require("/home/nida/Documents/Github Repos/My-Portfolio/src/pages/projects.js")),
+  "component---src-templates-blog-post-js": preferDefault(require("/home/nida/Documents/Github Repos/My-Portfolio/src/templates/blog-post.js")),
+  "component---src-templates-note-js": preferDefault(require("/home/nida/Documents/Github Repos/My-Portfolio/src/templates/note.js")),
+  "component---src-templates-project-js": preferDefault(require("/home/nida/Documents/Github Repos/My-Portfolio/src/templates/project.js"))
 }
 
