@@ -1,6 +1,6 @@
 ---
 title: "Working with GIT"
-date: "2026-06-29"
+date: "2026-05-29"
 description: "Git. A Computer Engineer's rachet."
 isNew: true
 ---

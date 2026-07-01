@@ -1,4 +1,4 @@
-### Type definitions saved at 2026-05-31T12:31:57.753Z ###
+### Type definitions saved at 2026-06-02T05:38:13.641Z ###
 
 enum RemoteFileFit {
   COVER
@@ -375,8 +375,8 @@ type SiteSiteMetadataSocial {
 type MarkdownRemarkFrontmatter {
   title: String
   date: Date @dateformat
-  description: String
   tags: [String]
+  description: String
   stars: String
   url: String
   isNew: Boolean
