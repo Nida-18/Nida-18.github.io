@@ -55,3 +55,42 @@ and finally for easy usage move it using `mv kerbrute_linux_amd64 kerbrute`
 
 It displays all the valid usernames.
 ![Valid usernames](ValidUsernames.png)
+
+## Task 4: Credential Discovery
+Task talks about several places that where developers and administrators accidentally, such as Git Repositories, CI/CD platforms and file shares. 
+
+### Hunting Credential in Git Repositories
+The task has provided us with an exposed [Github Repository](http://git.thm.loc/megacorp-admin/webapp-deploy)
+However, in real scenarios, we have to find the exposed repositories by simply searching companies name in Github.
+
+On finding the repositories we use `git log` to look for password/credentials.
+
+![Github Credential Hunting](GithubCredential.png)
+Jen5k1ns2025! is the retrieved password.
+mc-webapp-s3cret-k3y is the secret key.
+MegaCorp01! is the default password.
+
+### Hunting Credentials in Jenkins
+Jenkins is a common CI/CD platform on internal network, where credentials are often left. 
+
+Hunting through the Jenkins web interface we further find the default password in console output
+![Jenkins Credential](JenkinsCredential.png)
+
+## Task 5: Password Spraying
+In this approach we try a single password against many accounts.
+
+NetExec tool is used to perform spraying of the passwords we retrieved in the previous task on the valid usernames we retrieved in Task 3.
+
+![Valid Pair](ValidCredentialPair.png)
+
+The above shows that 'MegaCorp01!' is the password for accounts 'alice.moore' and 'dev.intern', i.e.; Alice Moore and Developer Intern, has kept the default password. Hence, we have attained a valid credential pair.
+
+## Task 6: Coercion Attack 
+Coercion tricks a device or user into sending authentication material to an attacker-controlled listener.
+
+In this we experience two techniques LDAP passback attack and a file based Coercion.
+
+### LDAP Passback Attack.
+
+
+
