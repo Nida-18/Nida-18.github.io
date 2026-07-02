@@ -65,10 +65,126 @@ and finally for easy usage move it using <code class="language-text">mv kerbrute
         decoding="async"
       />
   </a>
-    </span></p></div><footer style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)"><a style="font-size:13px;color:var(--muted);text-decoration:none;display:inline-block;margin-bottom:1.5rem" href="/blog/">← Back to Blog</a></footer></article></main><footer style="border-top:1px solid var(--border)"><div style="max-width:var(--max-w);margin:0 auto;padding:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem"><p style="font-size:12px;color:var(--subtle)">© <!-- -->2026<!-- --> Nida. All rights reserved.</p><div style="display:flex;gap:16px"><a href="https://github.com/Nida-18" style="font-size:12px;color:var(--muted);text-decoration:none">GitHub</a><a href="https://twitter.com/yourusername" style="font-size:12px;color:var(--muted);text-decoration:none">Twitter</a><a href="mailto:nidafatima2645@gmail.com" style="font-size:12px;color:var(--muted);text-decoration:none">Email</a></div></div></footer></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/AD-Breaching/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
+    </span></p>
+<h2>Task 4: Credential Discovery</h2>
+<p>Task talks about several places that where developers and administrators accidentally, such as Git Repositories, CI/CD platforms and file shares.</p>
+<h3>Hunting Credential in Git Repositories</h3>
+<p>The task has provided us with an exposed <a href="http://git.thm.loc/megacorp-admin/webapp-deploy">Github Repository</a>
+However, in real scenarios, we have to find the exposed repositories by simply searching companies name in Github.</p>
+<p>On finding the repositories we use <code class="language-text">git log</code> to look for password/credentials.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/319c958927221b38f30caad04928d76e/1e677/GithubCredential.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 56.111111111111114%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABxklEQVR42pVT2Y6bQBDkS+LdrA3GYO7LGMzNcHjxvY6U/P9vVJrBWiWKoygPpe5pmKKruhG0LYPsl1i6JVYBwWshOe8QrRaiWUM0akgWw9JuIJlTlJ2W12S75fmIhV5hrhUQovo7vOQGP7sjpjwsv8GJT7DjI7TNwAne6MUvcoLZKiVkeFEmTOf0sz7XidDPP2BFZ7jJFQ7BTS4wtwcE2Q3O7kz5EarXE3GLldthYVR4VfM/8KLk/MNC2Bzh5nvCACfr4eVXWMmd8AHVH7h02em4/K/r4hPj5bleUiwpVjxKZgXBKRn8ag89ZljHOdSwh7q9Q4lOdD5QnTomaME790qhbsc4WrGiD/HOH2fV6yAYJM+tWmjROICGQMZbFK0Mop1wXxb6NBiJ6uOzpc0eMrPfwCXH/QWbroNbEqoaasAwIz8m8+nSLxfH2uyRP/OQT9ksEujZDutgwLa+IWh6rDcNl/KqFE8H8LehcEI3G2ClLfQkg7nbwytOCOszFJ92y04xN4r/IwzbgaQy2AVDUF6wYz9oL6+0gz1Ehwj1nO/ZM5lPCa2MUXcV1CiFFhcwaKH1+EZ/z4E6HPBm9VS78CmOHv6L8CdKCmgWRytzxQAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="Github Credential Hunting"
+        title=""
+        src="/static/319c958927221b38f30caad04928d76e/1efcc/GithubCredential.png"
+        srcset="/static/319c958927221b38f30caad04928d76e/4abca/GithubCredential.png 180w,
+/static/319c958927221b38f30caad04928d76e/65e49/GithubCredential.png 360w,
+/static/319c958927221b38f30caad04928d76e/1efcc/GithubCredential.png 720w,
+/static/319c958927221b38f30caad04928d76e/ff6c2/GithubCredential.png 1080w,
+/static/319c958927221b38f30caad04928d76e/1e677/GithubCredential.png 1195w"
+        sizes="(max-width: 720px) 100vw, 720px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span>
+Jen5k1ns2025! is the retrieved password.
+mc-webapp-s3cret-k3y is the secret key.
+MegaCorp01! is the default password.</p>
+<h3>Hunting Credentials in Jenkins</h3>
+<p>Jenkins is a common CI/CD platform on internal network, where credentials are often left.</p>
+<p>Hunting through the Jenkins web interface we further find the default password in console output
+<span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/85354862068470bdb27a21e91c770149/bf94d/JenkinsCredential.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 55.55555555555556%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABSklEQVR42o1Si27DIAzM/3/kNK0ppHmQpLwSINxs1nRttaizZBmBfZzPrqZxgjEG67rCO4f6q4aUDbTWmOcZ16suZ61Nidbakusol89sfqFaayCEQNVLgaa50KPDNM3lMcaIlBLFhBAi1hAQ6G63nPOTR8qxbkUtJCq+2JPukXwhFsOg0HcD+l6VD2OK2LYNr7bXtl2PihPY85YpPvxKDEeSo2la1LXA+SzKB9zqQl38+lIkuAO+0t+d25TygrbtIEmSC0U+KzWRjz/s+/72iX8PyBqypsxyGMYC5P1yb++w5SNAHgZPuEzTWQLzf+r3L0A21qfoJzt8nAd8yhlyXKBMgtJrWaNdu72GZTlkuFHLlrQJKcOFBP/gvAHxZY3YBGl+yNDT9Hgop1MNRcLzrh3ZW8CyNrTUxrjSGuvJJRszz8/rVbq5acuA31l3WuerBMRUAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="Jenkins Credential"
+        title=""
+        src="/static/85354862068470bdb27a21e91c770149/1efcc/JenkinsCredential.png"
+        srcset="/static/85354862068470bdb27a21e91c770149/4abca/JenkinsCredential.png 180w,
+/static/85354862068470bdb27a21e91c770149/65e49/JenkinsCredential.png 360w,
+/static/85354862068470bdb27a21e91c770149/1efcc/JenkinsCredential.png 720w,
+/static/85354862068470bdb27a21e91c770149/ff6c2/JenkinsCredential.png 1080w,
+/static/85354862068470bdb27a21e91c770149/bf94d/JenkinsCredential.png 1351w"
+        sizes="(max-width: 720px) 100vw, 720px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
+<h2>Task 5: Password Spraying</h2>
+<p>In this approach we try a single password against many accounts.</p>
+<p>NetExec tool is used to perform spraying of the passwords we retrieved in the previous task on the valid usernames we retrieved in Task 3.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 720px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/9801042340d4fb31a5ee58b9cd77b541/645d7/ValidCredentialPair.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 53.888888888888886%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABZUlEQVR42o2TaW7CQAyFc5MSIJQtG9lIQihZUdUCAcLS+x/kdeyQIlSJ8GNkyzP65tlvRpoECWarEtqighGUmHpf0MMt7OURs8Ueloj2R527qwqq942R9YmhnaNvpOgZayh6goEeo6smkBR9DT+5CNgW2nyDt/EKQyeHIyD28oB5chZ5xWcoV4wc8jSBrNaArprdYsJ16d0s4KcCGJbQ/S0Xx24hIIcalF45BlkdGfZkScoNaP4BY4y9gtvz4hPvuUJtkF+51gocmGu+3fyn8CiAZ94jUJj/YC4u6KppG7BpeQfN33Bx5JLC463lC6zowGqtaP+KwgKeGHZjSgNsTKG9mQBRbgmnZfUFoM/AR4UEIIXUtsMtXzmX21oml4MHU+4z5JYz0TKpi+rV1zJ0Js8UGo0puzvQozGc+N2RGTS/UJyhefYE8KnCkZPBTSqYUcVvsTOJ+ReQSeaiZHWkvvktbS7/AhEtbfv4JUvoAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="Valid Pair"
+        title=""
+        src="/static/9801042340d4fb31a5ee58b9cd77b541/1efcc/ValidCredentialPair.png"
+        srcset="/static/9801042340d4fb31a5ee58b9cd77b541/4abca/ValidCredentialPair.png 180w,
+/static/9801042340d4fb31a5ee58b9cd77b541/65e49/ValidCredentialPair.png 360w,
+/static/9801042340d4fb31a5ee58b9cd77b541/1efcc/ValidCredentialPair.png 720w,
+/static/9801042340d4fb31a5ee58b9cd77b541/ff6c2/ValidCredentialPair.png 1080w,
+/static/9801042340d4fb31a5ee58b9cd77b541/645d7/ValidCredentialPair.png 1260w"
+        sizes="(max-width: 720px) 100vw, 720px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
+<p>The above shows that 'MegaCorp01!' is the password for accounts 'alice.moore' and 'dev.intern', i.e.; Alice Moore and Developer Intern, has kept the default password. Hence, we have attained a valid credential pair.</p>
+<h2>Task 6: Coercion Attack</h2>
+<p>Coercion tricks a device or user into sending authentication material to an attacker-controlled listener.</p>
+<p>In this we experience two techniques LDAP passback attack and a file based Coercion.</p>
+<h3>LDAP Passback Attack.</h3></div><footer style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)"><a style="font-size:13px;color:var(--muted);text-decoration:none;display:inline-block;margin-bottom:1.5rem" href="/blog/">← Back to Blog</a></footer></article></main><footer style="border-top:1px solid var(--border)"><div style="max-width:var(--max-w);margin:0 auto;padding:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem"><p style="font-size:12px;color:var(--subtle)">© <!-- -->2026<!-- --> Nida. All rights reserved.</p><div style="display:flex;gap:16px"><a href="https://github.com/Nida-18" style="font-size:12px;color:var(--muted);text-decoration:none">GitHub</a><a href="https://twitter.com/yourusername" style="font-size:12px;color:var(--muted);text-decoration:none">Twitter</a><a href="mailto:nidafatima2645@gmail.com" style="font-size:12px;color:var(--muted);text-decoration:none">Email</a></div></div></footer></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/AD-Breaching/";/*]]>*/</script><!-- slice-start id="_gatsby-scripts-1" -->
           <script
             id="gatsby-chunk-mapping"
           >
             window.___chunkMapping="{\"app\":[\"/app-3770354370cd79d4a7ce.js\"],\"component---src-pages-about-js\":[\"/component---src-pages-about-js-ec0e68deec829127943f.js\"],\"component---src-pages-blog-js\":[\"/component---src-pages-blog-js-f0b50f0b879da2e2d023.js\"],\"component---src-pages-index-js\":[\"/component---src-pages-index-js-c98fedcfe0c00010fad0.js\"],\"component---src-pages-notes-js\":[\"/component---src-pages-notes-js-a1f23906d8b5a6c5fc18.js\"],\"component---src-pages-projects-js\":[\"/component---src-pages-projects-js-89846696682afbb599ff.js\"],\"component---src-templates-blog-post-js\":[\"/component---src-templates-blog-post-js-b621632f0241aa112de5.js\"],\"component---src-templates-note-js\":[\"/component---src-templates-note-js-b8e036d261dc8825988d.js\"],\"component---src-templates-project-js\":[\"/component---src-templates-project-js-84b6acd8a11c35bb0321.js\"]}";
           </script>
-        <script>window.___webpackCompilationHash="5f0bfde07f7bc6e19206";</script><script src="/webpack-runtime-0270e18bfbc81f4c2c80.js" async></script><script src="/framework-6c22a386140aff9ee783.js" async></script><script src="/app-3770354370cd79d4a7ce.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
+        <script>window.___webpackCompilationHash="64f5538e0101bdd877aa";</script><script src="/webpack-runtime-0270e18bfbc81f4c2c80.js" async></script><script src="/framework-6c22a386140aff9ee783.js" async></script><script src="/app-3770354370cd79d4a7ce.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
