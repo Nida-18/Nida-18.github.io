@@ -91,6 +91,26 @@ Coercion tricks a device or user into sending authentication material to an atta
 In this we experience two techniques LDAP passback attack and a file based Coercion.
 
 ### LDAP Passback Attack.
+Network devices like printer, scanners and multifunction peripherals integrate with Active Directory via LDAP. For this to work, the device stores a set of LDAP credential.
+
+*Step 1*: Go to the printer application's web admin portal and login using admin:admin
+![Printer WebPage](PrinterWebPage.png)
+
+*Step 2*: Go to LDAP settings and set Server Address as lan0 of attackbox and LDAP port as 3489
+And save changes
+![LDAP Config](LDAPConf.png)
+
+*Step 3* Choose test connection and run `nc -lvnp 348`
+![LDAP Password](LDAPPassword.png)
+
+*Step 4*: Once we receive the LDAP Password as 'Pr1ntBind2025!', we use it to verify in NetExec
+![NetExec Recult](NxcResult.png)
+
+\[-\] indicates that the account has been disabled.
+Hence, we move to the next type of Coercion attack, File-Based Coercion.
+
+### File Based Coercion Attack
+
 
 
 
